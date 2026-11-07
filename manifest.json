@@ -1,7 +1,7 @@
 {
   "id": "skin-studio",
   "name": "美化工作室",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "白色全屏 AI 对话式美化工作台：35 个部位分支分别生成 CSS、实时预览、一键合并导出，附素材库与一键生成器。",
   "author": "chu-bing-yu",
   "entry": "https://raw.githubusercontent.com/chu-bing-yu/skin-studio/main/plugin.js",
