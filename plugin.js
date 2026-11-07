@@ -1,4 +1,4 @@
-/* skin-studio v0.2.0 | built 2026-11-07T12:58:02.785Z */
+/* skin-studio v0.3.0 | built 2026-11-07T14:05:57.704Z */
 (() => {
   // src/ui/theme.css
   var theme_default = '/* 设计令牌：白底 + 单一强调色，字号三档，圆角统一 */\n.ss-root {\n  --ss-bg: #ffffff;\n  --ss-soft: #f7f8fa;\n  --ss-chip: #f4f4f5;\n  --ss-line: #ecedef;\n  --ss-line-2: #dfe1e5;\n  --ss-ink: #1b1c1f;\n  --ss-ink-2: #4b5563;\n  --ss-muted: #9ca3af;\n  --ss-accent: #4d6bfe;\n  --ss-accent-soft: rgba(77, 107, 254, 0.08);\n  --ss-accent-line: rgba(77, 107, 254, 0.26);\n  --ss-danger: #c0392b;\n  --ss-ok: #0f9d58;\n\n  --ss-r-sm: 8px;\n  --ss-r-md: 12px;\n  --ss-r-lg: 16px;\n\n  --ss-fs-xs: 11px;\n  --ss-fs-sm: 12px;\n  --ss-fs-md: 13px;\n  --ss-fs-body: 14px;\n  --ss-fs-lg: 15px;\n\n  --ss-font: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC",\n    "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;\n  --ss-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Courier New", monospace;\n\n  --ss-t: 180ms ease;\n  --ss-sidebar: 300px;\n}\n';
@@ -7,7 +7,7 @@
   var base_default = "/* 两栏骨架：侧边栏 + 主区；窄屏侧边栏变抽屉 */\n\n.ss-root,\n.ss-root * {\n  box-sizing: border-box;\n}\n\n.ss-root {\n  position: relative;\n  display: flex;\n  width: calc(100% + env(safe-area-inset-left) + env(safe-area-inset-right));\n  height: calc(100% + env(safe-area-inset-top) + env(safe-area-inset-bottom));\n  margin: calc(0px - env(safe-area-inset-top)) calc(0px - env(safe-area-inset-right))\n    calc(0px - env(safe-area-inset-bottom)) calc(0px - env(safe-area-inset-left));\n  overflow: hidden;\n  background: var(--ss-bg);\n  color: var(--ss-ink);\n  font-family: var(--ss-font);\n  font-size: var(--ss-fs-body);\n  line-height: 1.5;\n  -webkit-font-smoothing: antialiased;\n  -webkit-tap-highlight-color: transparent;\n}\n\n/* 用 :where() 把重置的选择器权重降到 0，\n   否则 .ss-root button（0-1-1）会盖掉 .ss-btn--primary（0-1-0）这类组件样式 */\n:where(.ss-root) button {\n  font-family: inherit;\n  font-size: inherit;\n  color: inherit;\n  background: none;\n  border: 0;\n  padding: 0;\n  cursor: pointer;\n  text-align: left;\n}\n\n:where(.ss-root) input,\n:where(.ss-root) textarea {\n  font-family: inherit;\n  font-size: inherit;\n  color: inherit;\n  border: 0;\n  outline: none;\n  background: none;\n}\n\n.ss-root ::-webkit-scrollbar {\n  width: 4px;\n  height: 4px;\n}\n.ss-root ::-webkit-scrollbar-track {\n  background: transparent;\n}\n.ss-root ::-webkit-scrollbar-thumb {\n  background: var(--ss-line-2);\n  border-radius: 999px;\n}\n\n/* ---------------- 布局 ---------------- */\n\n.ss-app {\n  flex: 1 1 auto;\n  display: flex;\n  min-width: 0;\n  min-height: 0;\n}\n\n.ss-side {\n  flex: 0 0 auto;\n  width: var(--ss-sidebar);\n  display: flex;\n  flex-direction: column;\n  min-height: 0;\n  background: var(--ss-bg);\n  border-right: 1px solid var(--ss-line);\n  padding-top: env(safe-area-inset-top);\n}\n\n.ss-main {\n  flex: 1 1 auto;\n  display: flex;\n  flex-direction: column;\n  min-width: 0;\n  min-height: 0;\n  background: var(--ss-bg);\n}\n\n/* 窄屏：侧边栏 = 抽屉 */\n@media (max-width: 719px) {\n  .ss-side {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    width: 86%;\n    max-width: 340px;\n    z-index: 41;\n    border-radius: 0 var(--ss-r-lg) var(--ss-r-lg) 0;\n    transform: translateX(-100%);\n    transition: transform var(--ss-t);\n    pointer-events: none;\n  }\n  .ss-side--in {\n    transform: translateX(0);\n    pointer-events: auto;\n  }\n  .ss-side {\n    box-shadow: 0 10px 40px rgba(17, 18, 20, 0.12);\n  }\n}\n\n@media (min-width: 720px) {\n  .ss-hamburger,\n  .ss-side__close {\n    display: none !important;\n  }\n}\n\n/* ---------------- 侧边栏内部 ---------------- */\n\n.ss-side__head {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  height: 48px;\n  padding: 0 10px 0 14px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-side__title {\n  flex: 1 1 auto;\n  font-size: var(--ss-fs-lg);\n  font-weight: 600;\n  letter-spacing: 0.01em;\n}\n.ss-side__tree {\n  flex: 1 1 auto;\n  overflow-y: auto;\n  padding: 6px 6px 16px;\n}\n.ss-side__foot {\n  flex: 0 0 auto;\n  display: flex;\n  gap: 6px;\n  padding: 8px 10px;\n  border-top: 1px solid var(--ss-line);\n  padding-bottom: max(8px, env(safe-area-inset-bottom));\n}\n\n/* ---------------- 顶栏 ---------------- */\n\n.ss-top {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  height: 48px;\n  padding: 0 max(8px, env(safe-area-inset-right)) 0 max(8px, env(safe-area-inset-left));\n  padding-top: env(safe-area-inset-top);\n  box-sizing: content-box;\n  border-bottom: 1px solid var(--ss-line);\n  background: var(--ss-bg);\n}\n\n.ss-crumb {\n  flex: 1 1 auto;\n  min-width: 0;\n  display: flex;\n  align-items: baseline;\n  gap: 6px;\n  padding-left: 4px;\n  overflow: hidden;\n}\n.ss-crumb__main {\n  font-size: var(--ss-fs-lg);\n  font-weight: 600;\n  color: var(--ss-ink);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-crumb__sub {\n  flex: 0 0 auto;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  letter-spacing: 0.04em;\n}\n\n.ss-icon-btn {\n  flex: 0 0 auto;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 36px;\n  height: 36px;\n  border-radius: var(--ss-r-sm);\n  color: var(--ss-ink-2);\n  transition: background-color var(--ss-t), color var(--ss-t);\n}\n.ss-icon-btn:active {\n  background: var(--ss-chip);\n  color: var(--ss-ink);\n}\n.ss-icon-btn[disabled] {\n  opacity: 0.35;\n}\n\n/* ---------------- 消息区 ---------------- */\n\n.ss-body {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n}\n\n/* ---------------- 输入区 ---------------- */\n\n.ss-composer {\n  flex: 0 0 auto;\n  padding: 6px max(12px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom))\n    max(12px, env(safe-area-inset-left));\n  background: var(--ss-bg);\n  border-top: 1px solid var(--ss-line);\n}\n\n/* ---------------- 覆层 ---------------- */\n\n.ss-mask {\n  position: absolute;\n  inset: 0;\n  background: rgba(17, 18, 20, 0.28);\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity var(--ss-t);\n  z-index: 40;\n}\n.ss-mask--in {\n  opacity: 1;\n  pointer-events: auto;\n}\n\n.ss-sheet {\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  max-height: 76%;\n  display: flex;\n  flex-direction: column;\n  background: var(--ss-bg);\n  border-radius: var(--ss-r-lg) var(--ss-r-lg) 0 0;\n  transform: translateY(100%);\n  transition: transform var(--ss-t);\n  z-index: 42;\n  pointer-events: none;\n  padding-bottom: env(safe-area-inset-bottom);\n}\n.ss-sheet--in {\n  transform: translateY(0);\n  pointer-events: auto;\n}\n\n.ss-drawer-right {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  width: 88%;\n  max-width: 420px;\n  display: flex;\n  flex-direction: column;\n  background: var(--ss-bg);\n  border-left: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-lg) 0 0 var(--ss-r-lg);\n  transform: translateX(100%);\n  transition: transform var(--ss-t);\n  z-index: 42;\n  pointer-events: none;\n  padding-top: env(safe-area-inset-top);\n  padding-bottom: env(safe-area-inset-bottom);\n}\n.ss-drawer-right--in {\n  transform: translateX(0);\n  pointer-events: auto;\n}\n\n.ss-screen {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  flex-direction: column;\n  background: var(--ss-bg);\n  z-index: 50;\n  padding-top: env(safe-area-inset-top);\n  padding-bottom: env(safe-area-inset-bottom);\n  transform: translateX(100%);\n  transition: transform var(--ss-t);\n  pointer-events: none;\n  visibility: hidden;\n}\n.ss-screen--in {\n  transform: translateX(0);\n  pointer-events: auto;\n  visibility: visible;\n}\n\n.ss-sheet__head {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 16px 12px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-sheet__title {\n  flex: 1 1 auto;\n  font-size: var(--ss-fs-lg);\n  font-weight: 600;\n}\n.ss-sheet__body {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 6px 0 16px;\n}\n\n/* ---------------- 通用控件 ---------------- */\n\n.ss-btn {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: 6px;\n  height: 34px;\n  padding: 0 14px;\n  border-radius: var(--ss-r-sm);\n  font-size: var(--ss-fs-md);\n  font-weight: 500;\n  white-space: nowrap;\n  transition: background-color var(--ss-t), color var(--ss-t), border-color var(--ss-t);\n}\n.ss-btn--primary {\n  background: var(--ss-accent);\n  color: #fff;\n}\n.ss-btn--primary:active {\n  background: #3f5ae0;\n}\n.ss-btn--ghost {\n  border: 1px solid var(--ss-line-2);\n  color: var(--ss-ink-2);\n}\n.ss-btn--ghost:active {\n  background: var(--ss-chip);\n}\n.ss-btn--danger {\n  color: var(--ss-danger);\n}\n.ss-btn--block {\n  width: 100%;\n}\n.ss-btn[disabled] {\n  opacity: 0.45;\n}\n\n.ss-chip {\n  display: inline-flex;\n  align-items: center;\n  gap: 6px;\n  height: 28px;\n  padding: 0 10px;\n  border-radius: 999px;\n  background: var(--ss-chip);\n  color: var(--ss-ink-2);\n  font-size: var(--ss-fs-sm);\n  white-space: nowrap;\n}\n.ss-chip--on {\n  background: var(--ss-accent-soft);\n  color: var(--ss-accent);\n}\n\n.ss-empty {\n  flex: 1 1 auto;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  padding: 48px 28px;\n  text-align: center;\n  color: var(--ss-muted);\n}\n.ss-empty h2 {\n  margin: 0;\n  font-size: var(--ss-fs-lg);\n  font-weight: 600;\n  color: var(--ss-ink);\n}\n.ss-empty p {\n  margin: 0;\n  font-size: var(--ss-fs-md);\n  line-height: 1.7;\n  max-width: 34em;\n}\n\n.ss-toast {\n  position: absolute;\n  left: 50%;\n  bottom: 122px;\n  transform: translate(-50%, 8px);\n  max-width: 78%;\n  padding: 9px 14px;\n  border-radius: 999px;\n  background: rgba(17, 18, 20, 0.9);\n  color: #fff;\n  font-size: 12.5px;\n  line-height: 1.45;\n  opacity: 0;\n  pointer-events: none;\n  transition: opacity var(--ss-t), transform var(--ss-t);\n  z-index: 60;\n  text-align: center;\n}\n.ss-toast--in {\n  opacity: 1;\n  transform: translate(-50%, 0);\n}\n\n.ss-dialog {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 24px;\n  background: rgba(17, 18, 20, 0.34);\n  z-index: 70;\n  opacity: 0;\n  transition: opacity var(--ss-t);\n}\n.ss-dialog--in {\n  opacity: 1;\n}\n.ss-dialog__box {\n  width: 100%;\n  max-width: 320px;\n  background: #fff;\n  border-radius: var(--ss-r-lg);\n  padding: 18px;\n}\n.ss-dialog__title {\n  font-size: var(--ss-fs-lg);\n  font-weight: 600;\n  margin-bottom: 8px;\n}\n.ss-dialog__msg {\n  font-size: var(--ss-fs-md);\n  line-height: 1.65;\n  color: var(--ss-ink-2);\n  max-height: 42vh;\n  overflow: auto;\n  white-space: pre-wrap;\n}\n.ss-dialog__foot {\n  display: flex;\n  justify-content: flex-end;\n  gap: 8px;\n  margin-top: 16px;\n}\n\n.ss-lightbox {\n  position: absolute;\n  inset: 0;\n  z-index: 80;\n  background: rgba(10, 10, 12, 0.92);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 20px;\n}\n.ss-lightbox img {\n  max-width: 100%;\n  max-height: 100%;\n  object-fit: contain;\n  border-radius: var(--ss-r-sm);\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .ss-root * {\n    transition: none !important;\n    animation: none !important;\n  }\n}\n";
 
   // src/ui/views.css
-  var views_default = '/* ---------------- 侧边栏树 ---------------- */\n\n.ss-tree__row {\n  position: relative;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  width: 100%;\n  height: 34px;\n  padding: 0 10px 0 8px;\n  border-radius: var(--ss-r-sm);\n  transition: background-color var(--ss-t);\n}\n.ss-tree__row:active {\n  background: var(--ss-soft);\n}\n.ss-tree__row--on {\n  background: var(--ss-accent-soft);\n}\n.ss-tree__row--on::before {\n  content: "";\n  position: absolute;\n  left: 0;\n  top: 9px;\n  bottom: 9px;\n  width: 2px;\n  border-radius: 2px;\n  background: var(--ss-accent);\n}\n.ss-tree__chev {\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--ss-muted);\n  transform: rotate(-90deg);\n  transition: transform var(--ss-t);\n}\n.ss-tree__chev--open {\n  transform: rotate(0deg);\n}\n.ss-tree__spacer {\n  flex: 0 0 auto;\n  width: 16px;\n}\n.ss-tree__label {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink-2);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-tree__row--on .ss-tree__label {\n  color: var(--ss-ink);\n  font-weight: 500;\n}\n.ss-tree__row--scope .ss-tree__label {\n  font-weight: 600;\n  color: var(--ss-ink);\n}\n.ss-tree__row--plan .ss-tree__label {\n  color: var(--ss-ink-2);\n  font-style: normal;\n}\n.ss-tree__badge {\n  flex: 0 0 auto;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-tree__dot {\n  flex: 0 0 auto;\n  width: 5px;\n  height: 5px;\n  border-radius: 50%;\n  background: var(--ss-accent);\n  opacity: 0.65;\n}\n\n/* ---------------- 对话流 ---------------- */\n\n.ss-thread {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n  width: 100%;\n  max-width: 640px;\n  margin: 0 auto;\n  padding: 20px 16px 30px;\n}\n\n.ss-msg {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n  min-width: 0;\n}\n.ss-msg--me {\n  align-items: flex-end;\n}\n\n.ss-msg__bubble {\n  max-width: 86%;\n  padding: 10px 14px;\n  border-radius: var(--ss-r-md);\n  background: var(--ss-chip);\n  color: var(--ss-ink);\n  font-size: var(--ss-fs-body);\n  line-height: 1.6;\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-msg__plain {\n  font-size: var(--ss-fs-lg);\n  line-height: 1.75;\n  color: var(--ss-ink);\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-msg__meta {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  letter-spacing: 0.04em;\n  color: var(--ss-muted);\n}\n\n.ss-msg__images {\n  display: flex;\n  gap: 6px;\n  flex-wrap: wrap;\n}\n.ss-msg__img {\n  width: 92px;\n  height: 92px;\n  object-fit: cover;\n  border-radius: var(--ss-r-sm);\n  border: 1px solid var(--ss-line);\n  background: var(--ss-soft);\n}\n\n.ss-msg__actions {\n  display: flex;\n  gap: 2px;\n  opacity: 0;\n  transition: opacity var(--ss-t);\n}\n.ss-msg:hover .ss-msg__actions,\n.ss-msg:focus-within .ss-msg__actions {\n  opacity: 1;\n}\n@media (hover: none) {\n  .ss-msg__actions {\n    opacity: 0.55;\n  }\n}\n\n.ss-mini-btn {\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  height: 26px;\n  padding: 0 8px;\n  border-radius: 6px;\n  color: var(--ss-muted);\n  font-size: var(--ss-fs-xs);\n}\n.ss-mini-btn:active {\n  background: var(--ss-chip);\n  color: var(--ss-ink);\n}\n\n.ss-editor {\n  width: 100%;\n  min-height: 74px;\n  padding: 10px 12px;\n  border: 1px solid var(--ss-line-2);\n  border-radius: var(--ss-r-md);\n  font-size: var(--ss-fs-body);\n  line-height: 1.6;\n  resize: vertical;\n}\n\n/* ---------------- 多段 CSS 卡 ---------------- */\n\n.ss-card {\n  margin-top: 8px;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-md);\n  background: #fff;\n  overflow: hidden;\n}\n\n.ss-card__head {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 12px;\n  cursor: pointer;\n  user-select: none;\n}\n.ss-card__tag {\n  font-family: var(--ss-mono);\n  font-size: 10px;\n  letter-spacing: 0.14em;\n  text-transform: uppercase;\n  color: var(--ss-accent);\n  background: var(--ss-accent-soft);\n  padding: 2px 6px;\n  border-radius: 4px;\n}\n.ss-card__meta {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-size: var(--ss-fs-sm);\n  color: var(--ss-muted);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-card__chev {\n  color: var(--ss-muted);\n  transition: transform var(--ss-t);\n}\n.ss-card--open .ss-card__chev {\n  transform: rotate(180deg);\n}\n\n.ss-card__rows {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-card__row {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 7px 12px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-card__row:last-child {\n  border-bottom: 0;\n}\n.ss-card__id {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-ink-2);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-card__lines {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-card__write {\n  flex: 0 0 auto;\n  height: 26px;\n  padding: 0 10px;\n  border-radius: 6px;\n  background: var(--ss-accent);\n  color: #fff;\n  font-size: var(--ss-fs-xs);\n}\n.ss-card__write--done {\n  background: transparent;\n  color: var(--ss-ok);\n  box-shadow: inset 0 0 0 1px rgba(15, 157, 88, 0.3);\n}\n\n.ss-card__code {\n  display: none;\n  max-height: 320px;\n  overflow: auto;\n  padding: 12px;\n  background: var(--ss-soft);\n  border-top: 1px solid var(--ss-line);\n  font-family: var(--ss-mono);\n  font-size: 12px;\n  line-height: 1.7;\n  color: var(--ss-ink-2);\n  white-space: pre;\n}\n.ss-card--open .ss-card__code {\n  display: block;\n}\n\n.ss-card__foot {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 12px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-card__lint {\n  margin-left: auto;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 输入区 ---------------- */\n\n.ss-inputbox {\n  display: flex;\n  align-items: flex-end;\n  gap: 6px;\n  padding: 6px 6px 6px 8px;\n  background: var(--ss-soft);\n  border-radius: var(--ss-r-md);\n  transition: box-shadow var(--ss-t);\n}\n.ss-inputbox:focus-within {\n  box-shadow: inset 0 0 0 1px var(--ss-accent-line);\n}\n\n.ss-scope-badge {\n  flex: 0 0 auto;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  height: 28px;\n  padding: 0 8px;\n  border-radius: var(--ss-r-sm);\n  background: #fff;\n  box-shadow: inset 0 0 0 1px var(--ss-line);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-ink-2);\n  max-width: 42%;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.ss-textarea {\n  flex: 1 1 auto;\n  min-width: 0;\n  min-height: 32px;\n  max-height: 132px;\n  padding: 6px 4px;\n  font-size: var(--ss-fs-body);\n  line-height: 1.5;\n  resize: none;\n  overflow-y: auto;\n  background: transparent;\n}\n.ss-textarea::placeholder {\n  color: var(--ss-muted);\n}\n\n.ss-send {\n  flex: 0 0 auto;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  background: var(--ss-chip);\n  color: var(--ss-muted);\n  transition: background-color var(--ss-t), color var(--ss-t);\n}\n.ss-send--on {\n  background: var(--ss-accent);\n  color: #fff;\n}\n.ss-send--stop {\n  background: var(--ss-ink);\n  color: #fff;\n}\n\n.ss-composer__tools {\n  display: flex;\n  align-items: center;\n  gap: 2px;\n  padding: 2px 2px 6px;\n}\n.ss-composer__hint {\n  flex: 1 1 auto;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  text-align: right;\n  padding-right: 4px;\n}\n\n.ss-attach-row {\n  display: flex;\n  gap: 6px;\n  padding: 6px 2px;\n  flex-wrap: wrap;\n}\n.ss-attach {\n  position: relative;\n}\n.ss-attach img {\n  width: 54px;\n  height: 54px;\n  object-fit: cover;\n  border-radius: var(--ss-r-sm);\n  border: 1px solid var(--ss-line);\n}\n.ss-attach button {\n  position: absolute;\n  top: -6px;\n  right: -6px;\n  width: 18px;\n  height: 18px;\n  border-radius: 999px;\n  background: rgba(17, 18, 20, 0.72);\n  color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.ss-suggest {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  justify-content: center;\n  padding-top: 4px;\n}\n.ss-suggest .ss-chip {\n  height: 30px;\n  padding: 0 12px;\n  background: #fff;\n  box-shadow: inset 0 0 0 1px var(--ss-line);\n}\n.ss-suggest .ss-chip:active {\n  background: var(--ss-accent-soft);\n  color: var(--ss-accent);\n}\n\n/* ---------------- 提示词面板 ---------------- */\n\n.ss-tabs {\n  display: flex;\n  gap: 16px;\n  padding: 0 16px 8px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-tab {\n  position: relative;\n  padding: 4px 0 10px;\n  font-size: var(--ss-fs-md);\n  color: var(--ss-muted);\n}\n.ss-tab--on {\n  color: var(--ss-ink);\n  font-weight: 600;\n}\n.ss-tab--on::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 6px;\n  height: 2px;\n  border-radius: 2px;\n  background: var(--ss-accent);\n}\n\n.ss-pre {\n  flex: 1 1 auto;\n  min-height: 0;\n  margin: 12px 16px 16px;\n  padding: 12px;\n  overflow: auto;\n  background: var(--ss-soft);\n  border-radius: var(--ss-r-sm);\n  font-family: var(--ss-mono);\n  font-size: 11.5px;\n  line-height: 1.7;\n  color: var(--ss-ink-2);\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-panel-note {\n  padding: 0 16px 10px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  line-height: 1.6;\n}\n\n.ss-branch-list {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-branch-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-branch-item__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-branch-item__name {\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink);\n}\n.ss-branch-item__id {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 导出面板 ---------------- */\n\n.ss-export-row {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  padding: 14px 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-export-row__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-export-row__name {\n  font-size: var(--ss-fs-body);\n  color: var(--ss-ink);\n}\n.ss-export-row__hint {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-export-row__count {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 预览 ---------------- */\n\n.ss-pv {\n  flex: 1 1 auto;\n  display: flex;\n  flex-direction: column;\n  min-height: 0;\n}\n.ss-pv__tabs {\n  display: flex;\n  gap: 18px;\n  padding: 0 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-pv__stage {\n  flex: 1 1 auto;\n  min-height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 14px;\n  background: var(--ss-soft);\n}\n.ss-device {\n  width: min(390px, 100%);\n  height: 100%;\n  max-height: 100%;\n  border: 1px solid var(--ss-line-2);\n  border-radius: 18px;\n  overflow: hidden;\n  background: #fff;\n}\n.ss-pv__frame {\n  width: 100%;\n  height: 100%;\n  border: 0;\n  display: block;\n  background: #fff;\n}\n.ss-pv__foot {\n  flex: 0 0 auto;\n  display: flex;\n  gap: 8px;\n  padding: 8px 12px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-pv__note {\n  padding: 6px 16px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-accent);\n  background: var(--ss-accent-soft);\n}\n\n/* ---------------- 素材库 / 设置 ---------------- */\n\n.ss-scroll-page {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 14px 16px 28px;\n}\n\n.ss-field {\n  display: flex;\n  gap: 8px;\n  margin-bottom: 10px;\n}\n.ss-field input {\n  flex: 1 1 auto;\n  min-width: 0;\n  height: 36px;\n  padding: 0 10px;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-soft);\n  font-size: var(--ss-fs-md);\n}\n\n.ss-assets-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 8px;\n  margin-top: 12px;\n}\n@media (min-width: 560px) {\n  .ss-assets-grid {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n\n.ss-asset {\n  position: relative;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-sm);\n  overflow: hidden;\n  background: var(--ss-soft);\n  aspect-ratio: 1 / 1;\n}\n.ss-asset img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  display: block;\n}\n.ss-asset__fallback {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-asset__name {\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  padding: 12px 6px 4px;\n  font-size: 10px;\n  color: #fff;\n  background: linear-gradient(transparent, rgba(0, 0, 0, 0.62));\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-asset__used {\n  position: absolute;\n  top: 4px;\n  left: 4px;\n  padding: 1px 5px;\n  border-radius: 4px;\n  background: rgba(77, 107, 254, 0.9);\n  color: #fff;\n  font-size: 9px;\n  font-family: var(--ss-mono);\n}\n\n.ss-gen-list {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  margin-top: 10px;\n}\n.ss-gen {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 12px;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-sm);\n}\n.ss-gen__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-gen__name {\n  font-size: var(--ss-fs-md);\n  font-weight: 500;\n}\n.ss-gen__desc {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n.ss-list {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-list__row {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  padding: 13px 0;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-list__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-list__label {\n  font-size: var(--ss-fs-body);\n  color: var(--ss-ink);\n}\n.ss-list__hint {\n  margin-top: 3px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  line-height: 1.5;\n}\n.ss-list__value {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n.ss-switch {\n  flex: 0 0 auto;\n  width: 38px;\n  height: 22px;\n  border-radius: 999px;\n  background: var(--ss-line-2);\n  position: relative;\n  transition: background-color var(--ss-t);\n}\n.ss-switch::after {\n  content: "";\n  position: absolute;\n  top: 2px;\n  left: 2px;\n  width: 18px;\n  height: 18px;\n  border-radius: 999px;\n  background: #fff;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);\n  transition: transform var(--ss-t);\n}\n.ss-switch--on {\n  background: var(--ss-accent);\n}\n.ss-switch--on::after {\n  transform: translateX(16px);\n}\n';
+  var views_default = '/* ---------------- 侧边栏树 ---------------- */\n\n.ss-tree__row {\n  position: relative;\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  width: 100%;\n  height: 34px;\n  padding: 0 10px 0 8px;\n  border-radius: var(--ss-r-sm);\n  transition: background-color var(--ss-t);\n}\n.ss-tree__row:active {\n  background: var(--ss-soft);\n}\n.ss-tree__row--on {\n  background: var(--ss-accent-soft);\n}\n.ss-tree__row--on::before {\n  content: "";\n  position: absolute;\n  left: 0;\n  top: 9px;\n  bottom: 9px;\n  width: 2px;\n  border-radius: 2px;\n  background: var(--ss-accent);\n}\n.ss-tree__chev {\n  flex: 0 0 auto;\n  width: 16px;\n  height: 16px;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--ss-muted);\n  transform: rotate(-90deg);\n  transition: transform var(--ss-t);\n}\n.ss-tree__chev--open {\n  transform: rotate(0deg);\n}\n.ss-tree__spacer {\n  flex: 0 0 auto;\n  width: 16px;\n}\n.ss-tree__label {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink-2);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-tree__row--on .ss-tree__label {\n  color: var(--ss-ink);\n  font-weight: 500;\n}\n.ss-tree__row--scope .ss-tree__label {\n  font-weight: 600;\n  color: var(--ss-ink);\n}\n.ss-tree__row--plan .ss-tree__label {\n  color: var(--ss-ink-2);\n  font-style: normal;\n}\n.ss-tree__badge {\n  flex: 0 0 auto;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-tree__dot {\n  flex: 0 0 auto;\n  width: 5px;\n  height: 5px;\n  border-radius: 50%;\n  background: var(--ss-accent);\n  opacity: 0.65;\n}\n\n/* ---------------- 对话流 ---------------- */\n\n.ss-thread {\n  display: flex;\n  flex-direction: column;\n  gap: 20px;\n  width: 100%;\n  max-width: 640px;\n  margin: 0 auto;\n  padding: 20px 16px 30px;\n}\n\n.ss-msg {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n  min-width: 0;\n}\n.ss-msg--me {\n  align-items: flex-end;\n}\n\n.ss-msg__bubble {\n  max-width: 86%;\n  padding: 10px 14px;\n  border-radius: var(--ss-r-md);\n  background: var(--ss-chip);\n  color: var(--ss-ink);\n  font-size: var(--ss-fs-body);\n  line-height: 1.6;\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-msg__plain {\n  font-size: var(--ss-fs-lg);\n  line-height: 1.75;\n  color: var(--ss-ink);\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-msg__meta {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  letter-spacing: 0.04em;\n  color: var(--ss-muted);\n}\n\n.ss-msg__images {\n  display: flex;\n  gap: 6px;\n  flex-wrap: wrap;\n}\n.ss-msg__img {\n  width: 92px;\n  height: 92px;\n  object-fit: cover;\n  border-radius: var(--ss-r-sm);\n  border: 1px solid var(--ss-line);\n  background: var(--ss-soft);\n}\n\n.ss-msg__actions {\n  display: flex;\n  gap: 2px;\n  opacity: 0;\n  transition: opacity var(--ss-t);\n}\n.ss-msg:hover .ss-msg__actions,\n.ss-msg:focus-within .ss-msg__actions {\n  opacity: 1;\n}\n@media (hover: none) {\n  .ss-msg__actions {\n    opacity: 0.55;\n  }\n}\n\n.ss-mini-btn {\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  height: 26px;\n  padding: 0 8px;\n  border-radius: 6px;\n  color: var(--ss-muted);\n  font-size: var(--ss-fs-xs);\n}\n.ss-mini-btn:active {\n  background: var(--ss-chip);\n  color: var(--ss-ink);\n}\n\n.ss-editor {\n  width: 100%;\n  min-height: 74px;\n  padding: 10px 12px;\n  border: 1px solid var(--ss-line-2);\n  border-radius: var(--ss-r-md);\n  font-size: var(--ss-fs-body);\n  line-height: 1.6;\n  resize: vertical;\n}\n\n/* ---------------- 多段 CSS 卡 ---------------- */\n\n.ss-card {\n  margin-top: 8px;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-md);\n  background: #fff;\n  overflow: hidden;\n}\n\n.ss-card__head {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 12px;\n  cursor: pointer;\n  user-select: none;\n}\n.ss-card__tag {\n  font-family: var(--ss-mono);\n  font-size: 10px;\n  letter-spacing: 0.14em;\n  text-transform: uppercase;\n  color: var(--ss-accent);\n  background: var(--ss-accent-soft);\n  padding: 2px 6px;\n  border-radius: 4px;\n}\n.ss-card__meta {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-size: var(--ss-fs-sm);\n  color: var(--ss-muted);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-card__chev {\n  color: var(--ss-muted);\n  transition: transform var(--ss-t);\n}\n.ss-card--open .ss-card__chev {\n  transform: rotate(180deg);\n}\n\n.ss-card__rows {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-card__row {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 7px 12px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-card__row:last-child {\n  border-bottom: 0;\n}\n.ss-card__id {\n  flex: 1 1 auto;\n  min-width: 0;\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-ink-2);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-card__lines {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-card__write {\n  flex: 0 0 auto;\n  height: 26px;\n  padding: 0 10px;\n  border-radius: 6px;\n  background: var(--ss-accent);\n  color: #fff;\n  font-size: var(--ss-fs-xs);\n}\n.ss-card__write--done {\n  background: transparent;\n  color: var(--ss-ok);\n  box-shadow: inset 0 0 0 1px rgba(15, 157, 88, 0.3);\n}\n\n.ss-card__code {\n  display: none;\n  max-height: 320px;\n  overflow: auto;\n  padding: 12px;\n  background: var(--ss-soft);\n  border-top: 1px solid var(--ss-line);\n  font-family: var(--ss-mono);\n  font-size: 12px;\n  line-height: 1.7;\n  color: var(--ss-ink-2);\n  white-space: pre;\n}\n.ss-card--open .ss-card__code {\n  display: block;\n}\n\n.ss-card__foot {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 12px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-card__lint {\n  margin-left: auto;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 输入区 ---------------- */\n\n.ss-inputbox {\n  display: flex;\n  align-items: flex-end;\n  gap: 6px;\n  padding: 6px 6px 6px 8px;\n  background: var(--ss-soft);\n  border-radius: var(--ss-r-md);\n  transition: box-shadow var(--ss-t);\n}\n.ss-inputbox:focus-within {\n  box-shadow: inset 0 0 0 1px var(--ss-accent-line);\n}\n\n.ss-scope-badge {\n  flex: 0 0 auto;\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  height: 28px;\n  padding: 0 8px;\n  border-radius: var(--ss-r-sm);\n  background: #fff;\n  box-shadow: inset 0 0 0 1px var(--ss-line);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-ink-2);\n  max-width: 42%;\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.ss-textarea {\n  flex: 1 1 auto;\n  min-width: 0;\n  min-height: 32px;\n  max-height: 132px;\n  padding: 6px 4px;\n  font-size: var(--ss-fs-body);\n  line-height: 1.5;\n  resize: none;\n  overflow-y: auto;\n  background: transparent;\n}\n.ss-textarea::placeholder {\n  color: var(--ss-muted);\n}\n\n.ss-send {\n  flex: 0 0 auto;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  background: var(--ss-chip);\n  color: var(--ss-muted);\n  transition: background-color var(--ss-t), color var(--ss-t);\n}\n.ss-send--on {\n  background: var(--ss-accent);\n  color: #fff;\n}\n.ss-send--stop {\n  background: var(--ss-ink);\n  color: #fff;\n}\n\n.ss-composer__tools {\n  display: flex;\n  align-items: center;\n  gap: 2px;\n  padding: 2px 2px 6px;\n}\n.ss-composer__hint {\n  flex: 1 1 auto;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  text-align: right;\n  padding-right: 4px;\n}\n\n.ss-attach-row {\n  display: flex;\n  gap: 6px;\n  padding: 6px 2px;\n  flex-wrap: wrap;\n}\n.ss-attach {\n  position: relative;\n}\n.ss-attach img {\n  width: 54px;\n  height: 54px;\n  object-fit: cover;\n  border-radius: var(--ss-r-sm);\n  border: 1px solid var(--ss-line);\n}\n.ss-attach button {\n  position: absolute;\n  top: -6px;\n  right: -6px;\n  width: 18px;\n  height: 18px;\n  border-radius: 999px;\n  background: rgba(17, 18, 20, 0.72);\n  color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.ss-suggest {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 8px;\n  justify-content: center;\n  padding-top: 4px;\n}\n.ss-suggest .ss-chip {\n  height: 30px;\n  padding: 0 12px;\n  background: #fff;\n  box-shadow: inset 0 0 0 1px var(--ss-line);\n}\n.ss-suggest .ss-chip:active {\n  background: var(--ss-accent-soft);\n  color: var(--ss-accent);\n}\n\n/* ---------------- 提示词面板 ---------------- */\n\n.ss-tabs {\n  display: flex;\n  gap: 16px;\n  padding: 0 16px 8px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-tab {\n  position: relative;\n  padding: 4px 0 10px;\n  font-size: var(--ss-fs-md);\n  color: var(--ss-muted);\n}\n.ss-tab--on {\n  color: var(--ss-ink);\n  font-weight: 600;\n}\n.ss-tab--on::after {\n  content: "";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 6px;\n  height: 2px;\n  border-radius: 2px;\n  background: var(--ss-accent);\n}\n\n.ss-pre {\n  flex: 1 1 auto;\n  min-height: 0;\n  margin: 12px 16px 16px;\n  padding: 12px;\n  overflow: auto;\n  background: var(--ss-soft);\n  border-radius: var(--ss-r-sm);\n  font-family: var(--ss-mono);\n  font-size: 11.5px;\n  line-height: 1.7;\n  color: var(--ss-ink-2);\n  white-space: pre-wrap;\n  word-break: break-word;\n}\n\n.ss-panel-note {\n  padding: 0 16px 10px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  line-height: 1.6;\n}\n\n.ss-branch-list {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-branch-item {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-branch-item__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-branch-item__name {\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink);\n}\n.ss-branch-item__id {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 导出面板 ---------------- */\n\n.ss-export-row {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  padding: 14px 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-export-row__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-export-row__name {\n  font-size: var(--ss-fs-body);\n  color: var(--ss-ink);\n}\n.ss-export-row__hint {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-export-row__count {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n/* ---------------- 预览 ---------------- */\n\n.ss-pv {\n  flex: 1 1 auto;\n  display: flex;\n  flex-direction: column;\n  min-height: 0;\n}\n.ss-pv__tabs {\n  display: flex;\n  gap: 18px;\n  padding: 0 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-pv__stage {\n  flex: 1 1 auto;\n  min-height: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: 14px;\n  background: var(--ss-soft);\n}\n.ss-device {\n  width: min(390px, 100%);\n  height: 100%;\n  max-height: 100%;\n  border: 1px solid var(--ss-line-2);\n  border-radius: 18px;\n  overflow: hidden;\n  background: #fff;\n}\n.ss-pv__frame {\n  width: 100%;\n  height: 100%;\n  border: 0;\n  display: block;\n  background: #fff;\n}\n.ss-pv__foot {\n  flex: 0 0 auto;\n  display: flex;\n  gap: 8px;\n  padding: 8px 12px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-pv__note {\n  padding: 6px 16px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-accent);\n  background: var(--ss-accent-soft);\n}\n\n/* ---------------- 素材库 / 设置 ---------------- */\n\n.ss-scroll-page {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 14px 16px 28px;\n}\n\n.ss-field {\n  display: flex;\n  gap: 8px;\n  margin-bottom: 10px;\n}\n.ss-field input {\n  flex: 1 1 auto;\n  min-width: 0;\n  height: 36px;\n  padding: 0 10px;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-soft);\n  font-size: var(--ss-fs-md);\n}\n\n.ss-assets-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 8px;\n  margin-top: 12px;\n}\n@media (min-width: 560px) {\n  .ss-assets-grid {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n\n.ss-asset {\n  position: relative;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-sm);\n  overflow: hidden;\n  background: var(--ss-soft);\n  aspect-ratio: 1 / 1;\n}\n.ss-asset img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  display: block;\n}\n.ss-asset__fallback {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-asset__name {\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  padding: 12px 6px 4px;\n  font-size: 10px;\n  color: #fff;\n  background: linear-gradient(transparent, rgba(0, 0, 0, 0.62));\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-asset__used {\n  position: absolute;\n  top: 4px;\n  left: 4px;\n  padding: 1px 5px;\n  border-radius: 4px;\n  background: rgba(77, 107, 254, 0.9);\n  color: #fff;\n  font-size: 9px;\n  font-family: var(--ss-mono);\n}\n\n.ss-gen-list {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  margin-top: 10px;\n}\n.ss-gen {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 12px;\n  border: 1px solid var(--ss-line);\n  border-radius: var(--ss-r-sm);\n}\n.ss-gen__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-gen__name {\n  font-size: var(--ss-fs-md);\n  font-weight: 500;\n}\n.ss-gen__desc {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n.ss-list {\n  border-top: 1px solid var(--ss-line);\n}\n.ss-list__row {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  width: 100%;\n  padding: 13px 0;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-list__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-list__label {\n  font-size: var(--ss-fs-body);\n  color: var(--ss-ink);\n}\n.ss-list__hint {\n  margin-top: 3px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  line-height: 1.5;\n}\n.ss-list__value {\n  font-family: var(--ss-mono);\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n\n.ss-switch {\n  flex: 0 0 auto;\n  width: 38px;\n  height: 22px;\n  border-radius: 999px;\n  background: var(--ss-line-2);\n  position: relative;\n  transition: background-color var(--ss-t);\n}\n.ss-switch::after {\n  content: "";\n  position: absolute;\n  top: 2px;\n  left: 2px;\n  width: 18px;\n  height: 18px;\n  border-radius: 999px;\n  background: #fff;\n  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.16);\n  transition: transform var(--ss-t);\n}\n.ss-switch--on {\n  background: var(--ss-accent);\n}\n.ss-switch--on::after {\n  transform: translateX(16px);\n}\n\n/* ---------------- 方案切换器（侧栏顶） ---------------- */\n\n.ss-proj-btn {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  flex: 1 1 auto;\n  min-width: 0;\n  height: 36px;\n  padding: 0 6px 0 8px;\n  border-radius: var(--ss-r-sm);\n  transition: background-color var(--ss-t);\n}\n.ss-proj-btn:active {\n  background: var(--ss-soft);\n}\n.ss-proj-btn__main {\n  flex: 1 1 auto;\n  min-width: 0;\n  text-align: left;\n}\n.ss-proj-btn__name {\n  font-size: var(--ss-fs-md);\n  font-weight: 600;\n  color: var(--ss-ink);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-proj-btn__meta {\n  font-size: 10px;\n  color: var(--ss-muted);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-proj-btn__chev {\n  flex: 0 0 auto;\n  color: var(--ss-muted);\n  display: inline-flex;\n}\n\n.ss-proj-item {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  padding: 10px 12px 10px 16px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-proj-item--on {\n  background: var(--ss-accent-soft);\n}\n.ss-proj-item__main {\n  flex: 1 1 auto;\n  min-width: 0;\n  text-align: left;\n}\n.ss-proj-item__name {\n  font-size: var(--ss-fs-body);\n  color: var(--ss-ink);\n  font-weight: 500;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-proj-item__meta {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-proj-item__tick {\n  color: var(--ss-accent);\n  font-size: var(--ss-fs-md);\n  padding: 0 4px;\n}\n\n/* ---------------- 面板通用 ---------------- */\n\n.ss-sheet-inner {\n  display: flex;\n  flex-direction: column;\n  flex: 1 1 auto;\n  min-height: 0;\n}\n.ss-sheet__foot {\n  flex: 0 0 auto;\n  display: flex;\n  gap: 8px;\n  padding: 10px 16px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-menu-row {\n  display: block;\n  width: 100%;\n  padding: 14px 16px;\n  border-bottom: 1px solid var(--ss-line);\n  text-align: left;\n  font-size: var(--ss-fs-body);\n}\n\n/* ---------------- 提示词面板 ---------------- */\n\n.ss-prompt-panel {\n  display: flex;\n  flex-direction: column;\n  flex: 1 1 auto;\n  min-height: 0;\n}\n.ss-settings {\n  flex: 0 0 auto;\n  padding: 4px 16px 12px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-setting {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  min-height: 34px;\n  padding: 6px 0;\n}\n.ss-setting__main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.ss-setting__label {\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink);\n}\n.ss-setting__hint {\n  margin-top: 2px;\n  font-size: 10px;\n  color: var(--ss-muted);\n  line-height: 1.5;\n}\n.ss-sizebadge {\n  margin-left: auto;\n  font-family: var(--ss-mono);\n  font-size: 10px;\n  color: var(--ss-muted);\n  white-space: nowrap;\n  flex: 0 1 auto;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n/* 面板标题不换行，避免「注入的提 / 示词」这种断行 */\n.ss-sheet__title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-seg {\n  display: inline-flex;\n  flex: 0 0 auto;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-chip);\n  padding: 2px;\n}\n.ss-seg__item {\n  height: 26px;\n  padding: 0 10px;\n  border-radius: 6px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-ink-2);\n}\n.ss-seg__item--on {\n  background: #fff;\n  color: var(--ss-ink);\n  box-shadow: 0 1px 2px rgba(17, 18, 20, 0.08);\n}\n.ss-presetbar {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 8px 0 2px;\n}\n.ss-presetbar__label {\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n  flex: 0 0 auto;\n}\n.ss-select {\n  flex: 1 1 auto;\n  min-width: 0;\n  height: 32px;\n  padding: 0 8px;\n  border-radius: var(--ss-r-sm);\n  border: 1px solid var(--ss-line-2);\n  background: #fff;\n  font-size: var(--ss-fs-sm);\n  color: var(--ss-ink);\n  appearance: none;\n}\n.ss-panel-body {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  -webkit-overflow-scrolling: touch;\n  padding: 4px 16px 20px;\n}\n.ss-panel-body .ss-pre {\n  margin: 8px 0 12px;\n  max-height: 40vh;\n}\n\n/* ---------------- 导出结果页 ---------------- */\n\n.ss-exportpage {\n  flex: 1 1 auto;\n  display: flex;\n  flex-direction: column;\n  min-height: 0;\n}\n.ss-screen__bar {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  height: 48px;\n  padding: 0 10px;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-exportmeta {\n  flex: 0 0 auto;\n  padding: 8px 16px;\n  font-family: var(--ss-mono);\n  font-size: 10px;\n  color: var(--ss-muted);\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-exportbody {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow: hidden;\n  display: flex;\n}\n.ss-codebox {\n  flex: 1 1 auto;\n  min-height: 0;\n  display: flex;\n  overflow: auto;\n  background: #fff;\n}\n.ss-code__nums {\n  flex: 0 0 auto;\n  width: 34px;\n  padding: 12px 6px 12px 0;\n  text-align: right;\n  font-family: var(--ss-mono);\n  font-size: 11px;\n  line-height: 1.75;\n  color: #c7cbd1;\n  background: var(--ss-soft);\n  border-right: 1px solid var(--ss-line);\n  user-select: none;\n  white-space: pre;\n}\n.ss-code__text {\n  flex: 1 1 auto;\n  margin: 0;\n  padding: 12px;\n  font-family: var(--ss-mono);\n  font-size: 12px;\n  line-height: 1.75;\n  color: var(--ss-ink-2);\n  white-space: pre;\n  user-select: text;\n}\n.ss-history {\n  flex: 0 0 auto;\n  border-top: 1px solid var(--ss-line);\n  max-height: 30vh;\n  overflow-y: auto;\n}\n.ss-history__head {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n  width: 100%;\n  padding: 10px 16px;\n  font-size: var(--ss-fs-sm);\n  color: var(--ss-ink-2);\n}\n.ss-history__row {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  padding: 8px 12px 8px 16px;\n  border-top: 1px solid var(--ss-line);\n}\n.ss-history__main {\n  flex: 1 1 auto;\n  min-width: 0;\n  text-align: left;\n}\n.ss-history__name {\n  font-size: var(--ss-fs-sm);\n  color: var(--ss-ink);\n  font-family: var(--ss-mono);\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.ss-history__meta {\n  margin-top: 2px;\n  font-size: 10px;\n  color: var(--ss-muted);\n}\n\n/* ---------------- 预设编辑 ---------------- */\n\n.ss-preset-row {\n  display: flex;\n  align-items: center;\n  gap: 4px;\n  padding: 10px 0;\n  border-bottom: 1px solid var(--ss-line);\n}\n.ss-preset-row__main {\n  flex: 1 1 auto;\n  min-width: 0;\n  text-align: left;\n}\n.ss-preset-row__name {\n  font-size: var(--ss-fs-md);\n  color: var(--ss-ink);\n}\n.ss-preset-row__meta {\n  margin-top: 2px;\n  font-size: var(--ss-fs-xs);\n  color: var(--ss-muted);\n}\n.ss-preset-editorbox {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n.ss-preset-editor {\n  width: 100%;\n  min-height: 220px;\n  padding: 10px 12px;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-soft);\n  font-size: var(--ss-fs-md);\n  line-height: 1.7;\n  resize: vertical;\n}\n.ss-field__input {\n  width: 100%;\n  height: 36px;\n  padding: 0 10px;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-soft);\n  font-size: var(--ss-fs-md);\n}\n\n/* ---------------- Markdown ---------------- */\n\n.ss-msg__plain .ss-md__p {\n  margin: 0 0 10px;\n  font-size: var(--ss-fs-lg);\n  line-height: 1.75;\n}\n.ss-msg__plain .ss-md__p:last-child {\n  margin-bottom: 0;\n}\n.ss-md__h {\n  margin: 14px 0 8px;\n  font-size: 15px;\n  font-weight: 600;\n  line-height: 1.4;\n}\n.ss-md__list {\n  margin: 0 0 10px;\n  padding-left: 20px;\n  font-size: var(--ss-fs-lg);\n  line-height: 1.75;\n}\n.ss-md__li--sub {\n  margin-left: 14px;\n  list-style-type: circle;\n}\n.ss-md__quote {\n  margin: 0 0 10px;\n  padding: 2px 0 2px 10px;\n  border-left: 2px solid var(--ss-line-2);\n  color: var(--ss-ink-2);\n  font-size: var(--ss-fs-md);\n  line-height: 1.7;\n}\n.ss-md__hr {\n  height: 1px;\n  background: var(--ss-line);\n  margin: 14px 0;\n}\n.ss-md__code {\n  margin: 0 0 10px;\n  padding: 10px 12px;\n  border-radius: var(--ss-r-sm);\n  background: var(--ss-soft);\n  font-family: var(--ss-mono);\n  font-size: 12px;\n  line-height: 1.7;\n  overflow-x: auto;\n  white-space: pre;\n}\n.ss-md__inline {\n  padding: 1px 4px;\n  border-radius: 4px;\n  background: var(--ss-chip);\n  font-family: var(--ss-mono);\n  font-size: 0.92em;\n}\n.ss-md__link {\n  color: var(--ss-accent);\n  text-decoration: underline;\n  text-underline-offset: 2px;\n}\n';
 
   // src/core/storage.js
   var CHUNK = 50;
@@ -77,14 +77,40 @@
       for (let i = 0; i < index.length; i++) await remove(chunkKey(prefix, id, index[i]));
       await remove(prefix + "index." + id);
     }
-    function loadChat(nodeId) {
-      return loadChunked("ss.chat.", nodeId);
+    function chatIndexKey(pid, nodeId) {
+      return "ss.chat.index." + pid + "." + nodeId;
     }
-    function saveChat(nodeId, messages) {
-      return saveChunked("ss.chat.", nodeId, messages);
+    function chatChunkKey(pid, nodeId, n) {
+      return "ss.chat." + pid + "." + nodeId + "." + n;
     }
-    function dropChat(nodeId) {
-      return dropChunked("ss.chat.", nodeId);
+    async function loadChat(pid, nodeId) {
+      const index = await get(chatIndexKey(pid, nodeId), []);
+      const all = [];
+      for (let i = 0; i < index.length; i++) {
+        const part = await get(chatChunkKey(pid, nodeId, i), []);
+        if (Array.isArray(part)) all.push.apply(all, part);
+      }
+      return all;
+    }
+    async function saveChat(pid, nodeId, messages) {
+      const list = Array.isArray(messages) ? messages : [];
+      const total = Math.ceil(list.length / CHUNK);
+      const old = await get(chatIndexKey(pid, nodeId), []);
+      for (let i = 0; i < total; i++) {
+        await set(chatChunkKey(pid, nodeId, i), list.slice(i * CHUNK, (i + 1) * CHUNK));
+      }
+      for (let i = 0; i < old.length; i++) {
+        if (old[i] >= total) await remove(chatChunkKey(pid, nodeId, old[i]));
+      }
+      const index = [];
+      for (let i = 0; i < total; i++) index.push(i);
+      await set(chatIndexKey(pid, nodeId), index);
+      return total;
+    }
+    async function dropChat(pid, nodeId) {
+      const index = await get(chatIndexKey(pid, nodeId), []);
+      for (let i = 0; i < index.length; i++) await remove(chatChunkKey(pid, nodeId, i));
+      await remove(chatIndexKey(pid, nodeId));
     }
     return {
       get,
@@ -771,6 +797,216 @@
   }
   function totalCount(scope) {
     return (scope ? branchNodesOfScope(scope) : BRANCHES).length;
+  }
+
+  // src/core/workspaces.js
+  var DEFAULT_PROJECT_ID = "p_default";
+  var DEFAULT_PROJECT_NAME = "我的美化";
+  function uid(prefix) {
+    const rnd = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID().slice(0, 8) : Math.random().toString(36).slice(2, 10);
+    return (prefix || "id") + "_" + rnd;
+  }
+  function defaultPromptCfg() {
+    return {
+      injectHooks: false,
+      injectExisting: false,
+      refMode: "condensed",
+      presetId: ""
+    };
+  }
+  function normalizePromptCfg(cfg) {
+    const base = defaultPromptCfg();
+    const out = Object.assign({}, base, cfg || {});
+    if (["off", "condensed", "full"].indexOf(out.refMode) < 0) out.refMode = "condensed";
+    out.injectHooks = !!out.injectHooks;
+    out.injectExisting = !!out.injectExisting;
+    out.presetId = typeof out.presetId === "string" ? out.presetId : "";
+    return out;
+  }
+  function projectMeta(project) {
+    const branches = project.branches || {};
+    let written = 0;
+    Object.keys(branches).forEach(function(id) {
+      const b = branches[id];
+      if (b && b.css && b.css.trim()) written += 1;
+    });
+    return {
+      id: project.id,
+      name: project.name,
+      createdAt: project.createdAt,
+      updatedAt: project.updatedAt,
+      written
+    };
+  }
+  function newProject(name, opts) {
+    const now = Date.now();
+    return {
+      id: opts && opts.id || uid("p"),
+      name: String(name || "未命名方案").trim() || "未命名方案",
+      branches: emptyBranches(),
+      nodes: {},
+      promptCfg: {},
+      activeNodeId: "plan",
+      createdAt: now,
+      updatedAt: now
+    };
+  }
+  function normalizeProject(raw) {
+    if (!raw || typeof raw !== "object") return null;
+    const fallback = newProject(raw.name || DEFAULT_PROJECT_NAME, { id: raw.id });
+    const project = Object.assign({}, fallback, raw);
+    project.id = raw.id || fallback.id;
+    project.name = raw.name || fallback.name;
+    project.branches = normalize(raw.branches);
+    project.nodes = raw.nodes && typeof raw.nodes === "object" ? raw.nodes : {};
+    project.promptCfg = raw.promptCfg && typeof raw.promptCfg === "object" ? raw.promptCfg : {};
+    project.activeNodeId = raw.activeNodeId || "plan";
+    project.createdAt = raw.createdAt || fallback.createdAt;
+    project.updatedAt = raw.updatedAt || fallback.updatedAt;
+    return project;
+  }
+  function cfgOf(project, nodeId) {
+    if (!project) return defaultPromptCfg();
+    return normalizePromptCfg(project.promptCfg[nodeId]);
+  }
+  function setCfg(project, nodeId, patch) {
+    if (!project) return null;
+    const next = normalizePromptCfg(Object.assign({}, cfgOf(project, nodeId), patch || {}));
+    project.promptCfg[nodeId] = next;
+    project.updatedAt = Date.now();
+    return next;
+  }
+  function duplicateProject(project, name) {
+    const now = Date.now();
+    return {
+      id: uid("p"),
+      name: name || project.name + " 副本",
+      branches: JSON.parse(JSON.stringify(project.branches || {})),
+      nodes: JSON.parse(JSON.stringify(project.nodes || {})),
+      promptCfg: JSON.parse(JSON.stringify(project.promptCfg || {})),
+      activeNodeId: project.activeNodeId || "plan",
+      createdAt: now,
+      updatedAt: now
+    };
+  }
+  var EXPORT_LIMIT = 10;
+  var EXPORT_CSS_LIMIT = 120 * 1024;
+  function pushExportRecord(list, record) {
+    const item = Object.assign({}, record);
+    if (item.css && item.css.length > EXPORT_CSS_LIMIT) {
+      item.truncated = true;
+      item.css = item.css.slice(0, EXPORT_CSS_LIMIT) + "\n\n/* …超出 120KB，已截断，请重新导出完整文件… */";
+    }
+    const next = [item].concat(list || []);
+    return next.slice(0, EXPORT_LIMIT);
+  }
+
+  // src/core/presets.js
+  var BUILTIN = [
+    {
+      id: "preset_magazine",
+      name: "杂志风（细线衬线）",
+      scope: "*",
+      builtin: true,
+      text: [
+        "整体取向：杂志版面，不靠装饰靠排版。",
+        "只用 1px 细线分区，禁止阴影堆叠、渐变、玻璃模糊。",
+        "标题用衬线（Songti / Source Han Serif），元信息（时间、序号、金额单位）用等宽小字 + 大写 + 字距 0.14em。",
+        "配色只允许一个彩度（冷青灰），其余全部靠灰阶层次；圆角 ≤ 4px（气泡除外，气泡形状归宿主设置）。",
+        "留白优先：宁可少画一个框，也不要多一条边。"
+      ].join("\n")
+    },
+    {
+      id: "preset_paper",
+      name: "纸感低饱和",
+      scope: "*",
+      builtin: true,
+      text: [
+        "整体取向：米灰纸面 + 冷调墨色，像印在纸上的界面。",
+        "底色 #F5F4F0 一类暖灰，文字 #1A1E21 一类墨色；卡片面比底纸略亮一档即可，不要纯白刺眼。",
+        "分页与分区用 1px 线（#DEDDD6 / 夜间 #2B3138），不用卡片投影。",
+        "正文行高 1.75，字号 15px；小字 11px 等宽用于标注。",
+        "夜间反相：纸变墨（#12151A），墨变纸（#E8E6E1），不要简单反色导致灰阶塌陷。"
+      ].join("\n")
+    },
+    {
+      id: "preset_night",
+      name: "暗夜静默",
+      scope: "*",
+      builtin: true,
+      text: [
+        "整体取向：夜间阅读，低亮度、低对比、不刺眼。",
+        "底色 #12151A，卡片 #181C22，文字 #E8E6E1，次级文字不超过 #C3C7CB。",
+        "强调色只用一处：选中态或状态点，饱和度压到最低。",
+        "禁止纯黑纯白对撞；禁止发光描边；禁止大面积高饱和色块。"
+      ].join("\n")
+    },
+    {
+      id: "preset_minimal",
+      name: "极简克制",
+      scope: "*",
+      builtin: true,
+      text: [
+        "整体取向：少即是多，能删就删。",
+        "只保留两类元素：文字与 1px 线。图标尺寸、点击区、布局一律不动。",
+        "颜色只允许黑、白、两档灰，加一个低饱和强调色。",
+        "不要给按钮加底色，不要给卡片加边框，靠留白分组。"
+      ].join("\n")
+    }
+  ];
+  function builtinPresets() {
+    return BUILTIN.map(function(p) {
+      return Object.assign({}, p);
+    });
+  }
+  function allPresets(custom) {
+    const list = builtinPresets();
+    (custom || []).forEach(function(p) {
+      if (!p || !p.id) return;
+      list.push(Object.assign({ scope: "*" }, p, { builtin: false }));
+    });
+    return list;
+  }
+  function presetsForScope(custom, scope) {
+    return allPresets(custom).filter(function(p) {
+      return !p.scope || p.scope === "*" || p.scope === scope;
+    });
+  }
+  function createPreset(name, text, scope) {
+    return {
+      id: uid("preset"),
+      name: String(name || "未命名预设").trim() || "未命名预设",
+      scope: scope || "*",
+      text: String(text || ""),
+      builtin: false,
+      createdAt: Date.now()
+    };
+  }
+  function clonePreset(preset) {
+    return createPreset((preset.name || "预设") + " 副本", preset.text, preset.scope || "*");
+  }
+  function updatePreset(custom, id, patch) {
+    const list = custom || [];
+    const idx = list.findIndex(function(p) {
+      return p.id === id;
+    });
+    if (idx < 0) return false;
+    list[idx] = Object.assign({}, list[idx], patch || {}, { builtin: false });
+    return true;
+  }
+  function removePreset(custom, id) {
+    const list = custom || [];
+    const idx = list.findIndex(function(p) {
+      return p.id === id;
+    });
+    if (idx < 0) return false;
+    list.splice(idx, 1);
+    return true;
+  }
+  function isBuiltin(id) {
+    return BUILTIN.some(function(p) {
+      return p.id === id;
+    });
   }
 
   // src/core/hooks.js
@@ -2199,7 +2435,19 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     "禁止 backdrop-filter；filter 尽量不用；禁止 * 通配选择器、nth-child、[class*=]。",
     "变量统一 --ss- 前缀；引用前必须在同一作用域的令牌分支里定义。"
   ];
-  var FULL_FALLBACK = "(该部位暂无对应参考小节，请只依据钩子白名单与硬规则作答)";
+  var FULL_FALLBACK = "(该部位暂无对应参考小节，请只依据硬规则作答)";
+  var DEFAULT_CFG = {
+    injectHooks: false,
+    injectExisting: false,
+    refMode: "condensed",
+    presetId: ""
+  };
+  function cfgOf2(ctx) {
+    if (ctx && ctx.cfg) return Object.assign({}, DEFAULT_CFG, ctx.cfg);
+    return Object.assign({}, DEFAULT_CFG, {
+      refMode: ctx && ctx.mode ? ctx.mode : "condensed"
+    });
+  }
   function cssLineCount(css) {
     if (!css || !css.trim()) return 0;
     return css.split("\n").filter(function(l) {
@@ -2233,16 +2481,16 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     return item.sample.length > max ? item.sample.slice(0, max) + "\n/* …省略… */" : item.sample;
   }
   function branchLine(id, branches) {
-    const node = getNode(id);
     const def = getBranch(id) || {};
     const data = branches[id] || {};
     const lines = cssLineCount(data.css);
     return "- " + id + "（" + labelOf(id) + "，" + (lines ? lines + " 行" : "空") + "）" + (def.locked ? "［只读，不要输出此分支］" : "") + (data.enabled === false ? "［当前已关闭］" : "");
   }
-  function referenceBlock(branchIds, mode, branches) {
+  function referenceBlock(branchIds, refMode) {
+    if (refMode === "off" || !refMode) return "";
     const out = [];
-    if (mode === "full") {
-      out.push("【参考 · 完整小节（来自《全部 css 整理版》，可对照写法，但要按当前钩子白名单筛掉旧版/高风险选择器）】");
+    if (refMode === "full") {
+      out.push("【参考 · 完整小节（来自《全部 css 整理版》，可对照写法，但要按硬规则筛掉旧版/高风险选择器）】");
       out.push(fullReference(branchIds));
       return out.join("\n");
     }
@@ -2255,17 +2503,35 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     });
     return out.join("\n");
   }
+  function estimateTokens(text) {
+    const s = String(text || "");
+    let cjk = 0;
+    for (let i = 0; i < s.length; i++) {
+      if (s.charCodeAt(i) > 255) cjk += 1;
+    }
+    const ascii = s.length - cjk;
+    return Math.round(cjk + ascii / 4);
+  }
+  function presetBlock(presets, presetId) {
+    if (!presetId || !presets) return "";
+    const hit = presets.find(function(p) {
+      return p.id === presetId;
+    });
+    if (!hit || !hit.text || !hit.text.trim()) return "";
+    return "【自定义要求 · " + hit.name + "】\n" + hit.text.trim();
+  }
   function buildPrompt(nodeId, ctx) {
-    const branches = ctx.branches || {};
-    const mode = ctx.mode === "full" ? "full" : "condensed";
+    const branches = ctx && ctx.branches || {};
+    const cfg = cfgOf2(ctx);
+    const presets = ctx && ctx.presets || [];
     const node = getNode(nodeId) || getNode("plan");
     const scope = scopeOf(node.id);
     const targets = branchIdsOf(node.id);
     const parts = [];
     if (node.type === "plan") {
       parts.push("你是 Roche（小手机）的外观设计总监。这是「风格规划」对话，不直接产出部位 CSS。");
-      parts.push("你的任务是和用户把整套美化的设计语言定下来，并输出可执行的规范：");
       parts.push([
+        "你的任务是和用户把整套美化的设计语言定下来，并输出可执行的规范：",
         "1. 设计语言三句话：材质、排版、留白。",
         "2. 令牌规范：列出建议的 --ss-* 变量（纸面/墨色/强调色/线/圆角），并给日夜两套值。",
         "3. 命名与边界：哪些部位归线上 / 线下 / 全局，哪些碰不得（气泡圆角、尾巴形状、头像间距）。",
@@ -2274,6 +2540,8 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       ].join("\n"));
       parts.push("需要给令牌代码时，按【分支】online.tokens 输出 CSS；其余情况用自然语言回答，不要输出 CSS 代码块。");
       parts.push("【输出格式】给代码时：\n【判断】…\n【分支】online.tokens\n【模式】REPLACE\n【CSS】\n```css\n…\n```\n【说明】…");
+      const pre = presetBlock(presets, cfg.presetId);
+      if (pre) parts.push(pre);
       return parts.join("\n\n");
     }
     parts.push("你是 Roche（小手机）的外观皮肤工程师。Roche 是纯前端移动应用，用户把 CSS 粘贴进「美化」面板生效。只输出 CSS，不写 JS/HTML。");
@@ -2281,22 +2549,29 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     parts.push("【目标分支】\n" + targets.map(function(id) {
       return branchLine(id, branches);
     }).join("\n"));
-    parts.push("【可用钩子 · " + SCOPE_LABEL[scope] + "】\n" + hooksForScope(scope) + "\n\n【宿主 CSS 变量（可直接赋值）】\n" + HOST_VARS.join(", "));
+    if (cfg.injectHooks) {
+      parts.push("【可用钩子 · " + SCOPE_LABEL[scope] + "】\n" + hooksForScope(scope) + "\n\n【宿主 CSS 变量（可直接赋值）】\n" + HOST_VARS.join(", "));
+    }
     parts.push("【硬规则】\n" + HARD_RULES.map(function(r, i) {
       return i + 1 + ". " + r;
     }).join("\n"));
-    parts.push(referenceBlock(targets, mode, branches));
-    const existing = targets.filter(function(id) {
-      const b = branches[id];
-      return b && b.css && b.css.trim();
-    });
-    if (existing.length) {
-      const blocks = existing.slice(0, 4).map(function(id) {
-        return "/* " + id + " */\n" + branches[id].css.trim();
+    const ref = referenceBlock(targets, cfg.refMode);
+    if (ref) parts.push(ref);
+    if (cfg.injectExisting) {
+      const existing = targets.filter(function(id) {
+        const b = branches[id];
+        return b && b.css && b.css.trim();
       });
-      parts.push("【目标分支现有 CSS（在此基础上改）】\n" + blocks.join("\n\n"));
-      if (existing.length > 4) parts.push("（其余 " + (existing.length - 4) + " 个分支已有内容，未全部展开）");
+      if (existing.length) {
+        const blocks = existing.slice(0, 4).map(function(id) {
+          return "/* " + id + " */\n" + branches[id].css.trim();
+        });
+        parts.push("【目标分支现有 CSS（在此基础上改）】\n" + blocks.join("\n\n"));
+        if (existing.length > 4) parts.push("（其余 " + (existing.length - 4) + " 个分支已有内容，未全部展开）");
+      }
     }
+    const preset = presetBlock(presets, cfg.presetId);
+    if (preset) parts.push(preset);
     const isMulti = targets.length > 1;
     parts.push([
       "【输出协议 · 必须严格遵守】",
@@ -2716,29 +2991,6 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       return buildScopeCss(scope, branches, assets);
     });
   }
-  function downloadCss(name, css) {
-    const blob = new Blob([css], { type: "text/css;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = name;
-    a.rel = "noopener";
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function() {
-      URL.revokeObjectURL(url);
-      if (a.parentNode) a.parentNode.removeChild(a);
-    }, 3e3);
-  }
-  function downloadAll(branches, assets) {
-    const list = buildAll(branches, assets);
-    list.forEach(function(item, i) {
-      setTimeout(function() {
-        downloadCss(item.name, item.css);
-      }, i * 320);
-    });
-    return list;
-  }
   function buildLiveCss(scope, branches) {
     const items = collectScope(scope, branches);
     return items.map(function(item) {
@@ -2747,7 +2999,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   }
 
   // src/core/assets.js
-  function uid(prefix) {
+  function uid2(prefix) {
     const rnd = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID().slice(0, 8) : Math.random().toString(36).slice(2, 10);
     return (prefix || "id") + "_" + rnd;
   }
@@ -2773,7 +3025,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     if (!v.ok) return null;
     let slug = slugify(name);
     const asset = {
-      id: uid("a"),
+      id: uid2("a"),
       name: (name || "").trim() || "未命名素材",
       url: url.trim(),
       slug,
@@ -2836,7 +3088,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   }
 
   // src/app/container.js
-  var SCHEMA = 2;
+  var SCHEMA = 3;
   var LIVE_ID = "skin-studio-live";
   var DEFAULT_SETTINGS = {
     activeNodeId: "plan",
@@ -2844,21 +3096,25 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     live: false,
     imageEnabled: true
   };
-  function uid2(prefix) {
-    const rnd = typeof crypto !== "undefined" && crypto.randomUUID ? crypto.randomUUID().slice(0, 8) : Math.random().toString(36).slice(2, 10);
-    return (prefix || "id") + "_" + rnd;
-  }
   async function createApp(options) {
     const roche = options.roche;
     const storage = createStorage(roche);
     const listeners = [];
     const state = {
+      /* 方案 */
+      projects: [],
+      activeProjectId: "",
+      project: null,
+      /* 当前方案的内容 */
       branches: emptyBranches(),
       nodes: {},
       chats: {},
+      activeNodeId: "plan",
+      /* 全局 */
+      presets: [],
+      exports: [],
       assets: [],
       settings: Object.assign({}, DEFAULT_SETTINGS),
-      activeNodeId: "plan",
       loading: true,
       busy: false,
       draft: { text: "", images: [] }
@@ -2899,17 +3155,41 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       }
       return Promise.resolve(window.confirm((options2.title || "") + "\n" + (options2.message || "")));
     }
-    function persistBranches() {
-      storage.schedule("ss.branches", state.branches);
+    function projectKey(pid) {
+      return "ss.project." + pid;
     }
-    function persistNodes() {
-      storage.schedule("ss.nodes", state.nodes);
+    function upsertMeta() {
+      if (!state.project) return;
+      state.project.updatedAt = Date.now();
+      const meta = projectMeta(state.project);
+      const idx = state.projects.findIndex(function(p) {
+        return p.id === meta.id;
+      });
+      if (idx > -1) state.projects[idx] = meta;
+      else state.projects.unshift(meta);
+    }
+    function persistProject(immediate) {
+      if (!state.project) return;
+      upsertMeta();
+      if (immediate) {
+        storage.set(projectKey(state.project.id), state.project);
+        storage.set("ss.projects", state.projects);
+      } else {
+        storage.schedule(projectKey(state.project.id), state.project);
+        storage.schedule("ss.projects", state.projects);
+      }
     }
     function persistSettings() {
       storage.schedule("ss.settings", state.settings);
     }
     function persistAssets() {
       storage.schedule("ss.assets", state.assets);
+    }
+    function persistPresets() {
+      storage.schedule("ss.presets", state.presets);
+    }
+    function persistExports() {
+      storage.schedule("ss.exports", state.exports);
     }
     function messages() {
       return state.chats[state.activeNodeId] || [];
@@ -2919,71 +3199,185 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     }
     function persistChat() {
       if (chatTimer) clearTimeout(chatTimer);
+      const pid = state.activeProjectId;
       const nodeId = state.activeNodeId;
       const list = state.chats[nodeId] || [];
       chatTimer = setTimeout(function() {
         chatTimer = null;
-        storage.saveChat(nodeId, list).catch(function(err) {
+        storage.saveChat(pid, nodeId, list).catch(function(err) {
           console.warn("[skin-studio] 保存对话失败", err);
         });
       }, 400);
     }
-    async function flushAll() {
+    async function flushChats() {
       if (chatTimer) {
         clearTimeout(chatTimer);
         chatTimer = null;
       }
-      const jobs = [
-        storage.set("ss.branches", state.branches),
-        storage.set("ss.nodes", state.nodes),
-        storage.set("ss.settings", state.settings),
-        storage.set("ss.assets", state.assets)
-      ];
-      Object.keys(state.chats).forEach(function(nodeId) {
-        jobs.push(storage.saveChat(nodeId, state.chats[nodeId] || []));
+      const pid = state.activeProjectId;
+      const jobs = Object.keys(state.chats).map(function(nodeId) {
+        return storage.saveChat(pid, nodeId, state.chats[nodeId] || []);
       });
       await Promise.all(jobs).catch(function(err) {
-        console.warn("[skin-studio] 落盘失败", err);
+        console.warn("[skin-studio] 保存对话失败", err);
       });
     }
-    async function migrateIfNeeded() {
+    async function flushAll() {
+      await flushChats();
+      if (state.project) {
+        upsertMeta();
+        await Promise.all([
+          storage.set(projectKey(state.project.id), state.project),
+          storage.set("ss.projects", state.projects),
+          storage.set("ss.activeProjectId", state.activeProjectId),
+          storage.set("ss.settings", state.settings),
+          storage.set("ss.assets", state.assets),
+          storage.set("ss.presets", state.presets),
+          storage.set("ss.exports", state.exports),
+          storage.set("ss.schema", SCHEMA)
+        ]).catch(function(err) {
+          console.warn("[skin-studio] 落盘失败", err);
+        });
+      }
+    }
+    async function migrate() {
       const v = await storage.get("ss.schema", 0);
-      if (v === SCHEMA) return false;
-      const projects = await storage.get("ss.projects", []);
-      const keys = [];
-      (Array.isArray(projects) ? projects : []).forEach(function(p) {
-        keys.push("ss.project." + p.id);
-        keys.push("ss.msgindex." + p.id);
-        for (let i = 0; i < 40; i++) keys.push("ss.messages." + p.id + "." + i);
-      });
-      keys.push("ss.projects", "ss.project.null", "ss.msgindex.null");
-      for (let i = 0; i < keys.length; i++) await storage.remove(keys[i]);
-      const nodesState = await storage.get("ss.nodes", {});
-      Object.keys(nodesState || {}).forEach(function(id) {
-        storage.dropChat(id);
-      });
+      if (v === SCHEMA) return { migrated: false };
+      const oldBranches = await storage.get("ss.branches", null);
+      if (!oldBranches || typeof oldBranches !== "object") {
+        await storage.set("ss.schema", SCHEMA);
+        return { migrated: false };
+      }
+      const oldNodes = await storage.get("ss.nodes", {}) || {};
+      const oldSettings = await storage.get("ss.settings", {}) || {};
+      const project = newProject(oldSettings.projectName || DEFAULT_PROJECT_NAME, { id: DEFAULT_PROJECT_ID });
+      project.branches = normalize(oldBranches);
+      project.nodes = oldNodes && typeof oldNodes === "object" ? oldNodes : {};
+      project.activeNodeId = getNode(oldSettings.activeNodeId || "") ? oldSettings.activeNodeId : "plan";
+      await storage.set(projectKey(project.id), project);
+      await storage.set("ss.projects", [projectMeta(project)]);
+      await storage.set("ss.activeProjectId", project.id);
+      let movedChats = 0;
+      for (let i = 0; i < NODES.length; i++) {
+        const nodeId = NODES[i].id;
+        const msgs = await storage.loadChunked("ss.chat.", nodeId);
+        if (msgs && msgs.length) {
+          await storage.saveChat(project.id, nodeId, msgs);
+          movedChats += 1;
+        }
+        await storage.dropChunked("ss.chat.", nodeId);
+      }
+      await storage.remove("ss.branches");
+      await storage.remove("ss.nodes");
       await storage.set("ss.schema", SCHEMA);
+      console.log("[skin-studio] 已迁移 v2 → v3，保留分支与 " + movedChats + " 份对话");
+      return { migrated: true, movedChats };
+    }
+    async function loadProject(pid) {
+      const raw = await storage.get(projectKey(pid), null);
+      const project = normalizeProject(raw) || newProject(DEFAULT_PROJECT_NAME, { id: pid });
+      state.project = project;
+      state.activeProjectId = project.id;
+      state.branches = project.branches;
+      state.nodes = project.nodes;
+      state.chats = {};
+      state.activeNodeId = getNode(project.activeNodeId || "") ? project.activeNodeId : "plan";
+      state.draft = { text: "", images: [] };
+      await ensureChat(state.activeNodeId);
+      return project;
+    }
+    async function switchProject(pid) {
+      if (!pid || pid === state.activeProjectId) return;
+      await flushAll();
+      await loadProject(pid);
+      state.settings.activeProjectId = pid;
+      persistSettings();
+      notify("all");
+    }
+    async function createProject(name) {
+      await flushAll();
+      const project = newProject(name || "美化 " + (state.projects.length + 1));
+      await storage.set(projectKey(project.id), project);
+      state.projects.unshift(projectMeta(project));
+      await storage.set("ss.projects", state.projects);
+      await storage.set("ss.activeProjectId", project.id);
+      await loadProject(project.id);
+      notify("all");
+      toast("已新建方案「" + project.name + "」");
+      return project;
+    }
+    function renameProject(name, pid) {
+      const target = pid || state.activeProjectId;
+      const title = String(name || "").trim();
+      if (!title) return false;
+      if (target === state.activeProjectId && state.project) {
+        state.project.name = title;
+        persistProject();
+      } else {
+        const meta = state.projects.find(function(p) {
+          return p.id === target;
+        });
+        if (!meta) return false;
+        meta.name = title;
+        storage.get(projectKey(target), null).then(function(raw) {
+          const p = normalizeProject(raw);
+          if (p) {
+            p.name = title;
+            storage.set(projectKey(target), p);
+          }
+        });
+        storage.set("ss.projects", state.projects);
+      }
+      notify("project");
+      return true;
+    }
+    async function duplicateProject2(pid) {
+      await flushChats();
+      const target = pid || state.activeProjectId;
+      let source = state.project;
+      if (target !== state.activeProjectId) source = normalizeProject(await storage.get(projectKey(target), null));
+      if (!source) return null;
+      const copy = duplicateProject(source);
+      await storage.set(projectKey(copy.id), copy);
+      const srcChats = target === state.activeProjectId ? state.chats : null;
+      for (let i = 0; i < NODES.length; i++) {
+        const nodeId = NODES[i].id;
+        const msgs = srcChats ? srcChats[nodeId] || [] : await storage.loadChat(target, nodeId);
+        if (msgs && msgs.length) await storage.saveChat(copy.id, nodeId, msgs);
+      }
+      state.projects.unshift(projectMeta(copy));
+      await storage.set("ss.projects", state.projects);
+      notify("project");
+      toast("已复制为「" + copy.name + "」");
+      return copy;
+    }
+    async function deleteProject(pid) {
+      const target = pid || state.activeProjectId;
+      if (state.projects.length <= 1) {
+        toast("至少保留一个方案");
+        return false;
+      }
+      for (let i = 0; i < NODES.length; i++) {
+        await storage.dropChat(target, NODES[i].id);
+      }
+      await storage.remove(projectKey(target));
+      state.projects = state.projects.filter(function(p) {
+        return p.id !== target;
+      });
+      await storage.set("ss.projects", state.projects);
+      if (target === state.activeProjectId) {
+        await loadProject(state.projects[0].id);
+        await storage.set("ss.activeProjectId", state.activeProjectId);
+      }
+      notify("all");
+      toast("已删除方案");
       return true;
     }
     async function ensureChat(nodeId) {
       if (state.chats[nodeId]) return state.chats[nodeId];
-      const list = await storage.loadChat(nodeId);
+      const list = await storage.loadChat(state.activeProjectId, nodeId);
       state.chats[nodeId] = Array.isArray(list) ? list : [];
       return state.chats[nodeId];
-    }
-    async function switchNode(nodeId) {
-      if (!getNode(nodeId)) return;
-      if (nodeId === state.activeNodeId) return;
-      await persistActiveChat();
-      state.activeNodeId = nodeId;
-      state.settings.activeNodeId = nodeId;
-      state.draft = { text: "", images: [] };
-      await ensureChat(nodeId);
-      state.nodes[nodeId] = state.nodes[nodeId] || { collapsed: false, promptMode: "condensed", lastAt: 0 };
-      state.nodes[nodeId].lastAt = Date.now();
-      persistSettings();
-      persistNodes();
-      notify("node");
     }
     async function persistActiveChat() {
       if (chatTimer) {
@@ -2991,26 +3385,107 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         chatTimer = null;
       }
       if (state.chats[state.activeNodeId]) {
-        await storage.saveChat(state.activeNodeId, state.chats[state.activeNodeId]);
+        await storage.saveChat(state.activeProjectId, state.activeNodeId, state.chats[state.activeNodeId]);
       }
     }
+    async function switchNode(nodeId) {
+      if (!getNode(nodeId)) return;
+      if (nodeId === state.activeNodeId) return;
+      await persistActiveChat();
+      state.activeNodeId = nodeId;
+      state.settings.activeNodeId = nodeId;
+      if (state.project) {
+        state.project.activeNodeId = nodeId;
+        persistProject();
+      }
+      state.draft = { text: "", images: [] };
+      await ensureChat(nodeId);
+      state.nodes[nodeId] = state.nodes[nodeId] || { collapsed: false, lastAt: 0 };
+      state.nodes[nodeId].lastAt = Date.now();
+      persistSettings();
+      notify("node");
+    }
     function nodeState(nodeId) {
-      return state.nodes[nodeId] || { collapsed: false, promptMode: "condensed", lastAt: 0 };
+      return state.nodes[nodeId] || { collapsed: false, lastAt: 0 };
     }
     function toggleCollapse(nodeId) {
       const cur = nodeState(nodeId);
       state.nodes[nodeId] = Object.assign({}, cur, { collapsed: !cur.collapsed });
-      persistNodes();
+      persistProject();
       notify("sidebar");
     }
+    function promptCfg(nodeId) {
+      return cfgOf(state.project, nodeId || state.activeNodeId);
+    }
+    function setPromptCfg(nodeId, patch) {
+      if (!state.project) return null;
+      const next = setCfg(state.project, nodeId || state.activeNodeId, patch);
+      persistProject();
+      return next;
+    }
     function promptMode(nodeId) {
-      return nodeState(nodeId).promptMode === "full" ? "full" : "condensed";
+      return promptCfg(nodeId).refMode;
     }
     function setPromptMode(nodeId, mode) {
-      const cur = nodeState(nodeId);
-      state.nodes[nodeId] = Object.assign({}, cur, { promptMode: mode === "full" ? "full" : "condensed" });
-      persistNodes();
-      notify("prompt");
+      setPromptCfg(nodeId, { refMode: mode });
+    }
+    function promptText(nodeId, overrideCfg) {
+      const id = nodeId || state.activeNodeId;
+      const cfg = overrideCfg ? normalizePromptCfg(overrideCfg) : promptCfg(id);
+      return buildPrompt(id, {
+        branches: state.branches,
+        cfg,
+        presets: allPresets(state.presets)
+      });
+    }
+    function targets(nodeId) {
+      return targetSummary(nodeId || state.activeNodeId, state.branches);
+    }
+    function listPresets(scope) {
+      return scope ? presetsForScope(state.presets, scope) : allPresets(state.presets);
+    }
+    function savePreset(preset) {
+      if (preset.id && isBuiltin(preset.id)) {
+        const copy = clonePreset(preset);
+        state.presets.push(copy);
+        persistPresets();
+        notify("presets");
+        return copy;
+      }
+      if (preset.id) {
+        updatePreset(state.presets, preset.id, preset);
+        persistPresets();
+        notify("presets");
+        return preset;
+      }
+      const created = createPreset(preset.name, preset.text, preset.scope);
+      state.presets.push(created);
+      persistPresets();
+      notify("presets");
+      return created;
+    }
+    function clonePreset2(preset) {
+      const copy = clonePreset(preset);
+      state.presets.push(copy);
+      persistPresets();
+      notify("presets");
+      return copy;
+    }
+    function deletePreset(id) {
+      if (isBuiltin(id)) {
+        toast("内置预设不能删除，可以复制后修改");
+        return false;
+      }
+      const ok = removePreset(state.presets, id);
+      if (ok) {
+        Object.keys(state.project && state.project.promptCfg || {}).forEach(function(nodeId) {
+          if (state.project.promptCfg[nodeId].presetId === id) state.project.promptCfg[nodeId].presetId = "";
+        });
+        persistPresets();
+        persistProject();
+        notify("presets");
+      }
+      return ok;
     }
     function lintFor(branchId, css) {
       return lint(css, {
@@ -3024,7 +3499,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       const r = lintFor(branchId, css);
       const ok = write(state.branches, branchId, css, mode, source);
       if (ok) {
-        persistBranches();
+        persistProject();
         notify("branch");
       }
       return { ok, lint: r };
@@ -3050,10 +3525,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       if (!msg || !msg.parts) return { ok: 0, failed: [] };
       const failed = [];
       let ok = 0;
-      msg.parts.forEach(function(part, i) {
-        const r = {
-          ok: false
-        };
+      msg.parts.forEach(function(part) {
         const result = writeToBranch(part.branchId, part.css, part.mode, "ai");
         if (result.ok) {
           part.written = true;
@@ -3064,7 +3536,6 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         } else {
           failed.push(part.branchId + "：分支被锁或不存在");
         }
-        return r;
       });
       persistChat();
       notify("chat");
@@ -3073,7 +3544,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     function undoBranch(branchId) {
       const ok = undo(state.branches, branchId);
       if (ok) {
-        persistBranches();
+        persistProject();
         notify("branch");
       }
       return ok;
@@ -3081,7 +3552,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     function resetBranch(branchId) {
       const ok = reset(state.branches, branchId);
       if (ok) {
-        persistBranches();
+        persistProject();
         notify("branch");
       }
       return ok;
@@ -3089,7 +3560,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     function toggleBranch(branchId, enabled) {
       const ok = toggle(state.branches, branchId, enabled);
       if (ok) {
-        persistBranches();
+        persistProject();
         notify("branch");
       }
       return ok;
@@ -3148,14 +3619,12 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       const imgs = (images || []).slice();
       if (!content && !imgs.length) return;
       const nodeId = state.activeNodeId;
-      const node = getNode(nodeId);
-      const mode = promptMode(nodeId);
-      const prompt = buildPrompt(nodeId, { branches: state.branches, mode });
+      const prompt = promptText(nodeId);
       const history = messages().slice(-6).map(function(m) {
         return { role: m.role, text: m.text };
       });
       addMessage({
-        id: uid2("m"),
+        id: uid("m"),
         role: "user",
         text: content,
         images: imgs.map(function(i) {
@@ -3178,7 +3647,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       state.busy = false;
       if (res.error) {
         addMessage({
-          id: uid2("m"),
+          id: uid("m"),
           role: "ai",
           createdAt: Date.now(),
           parts: [],
@@ -3189,7 +3658,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       }
       const parsed = parseReply(res.text, branchIdsOf(nodeId)[0] || "");
       addMessage({
-        id: uid2("m"),
+        id: uid("m"),
         role: "ai",
         createdAt: Date.now(),
         text: parsed.chat,
@@ -3223,39 +3692,52 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       deleteMessage(msgId);
       await send(userMsg.text, images);
     }
-    function promptText(nodeId, modeOverride) {
-      const mode = modeOverride || promptMode(nodeId || state.activeNodeId);
-      return buildPrompt(nodeId || state.activeNodeId, { branches: state.branches, mode });
+    function recordExport(scope, built) {
+      state.exports = pushExportRecord(state.exports, {
+        id: uid("exp"),
+        projectId: state.activeProjectId,
+        projectName: state.project ? state.project.name : "",
+        scope,
+        name: built.name,
+        css: built.css,
+        at: Date.now()
+      });
+      persistExports();
     }
-    function targets(nodeId) {
-      return targetSummary(nodeId || state.activeNodeId, state.branches);
+    function buildScope(scope) {
+      return buildScopeCss(scope, state.branches, state.assets);
     }
     function exportScope(scope) {
-      const built = buildScopeCss(scope, state.branches, state.assets);
+      const built = buildScope(scope);
       if (!built.report.stats.branches) {
         toast(SCOPE_LABEL[scope] + "还没有任何内容");
         return null;
       }
-      downloadCss(built.name, built.css);
-      toast("已导出 " + built.name);
+      recordExport(scope, built);
       return built;
     }
     function exportAll() {
-      const list = buildAll(state.branches, state.assets);
-      const empty = list.filter(function(i) {
-        return !i.report.stats.branches;
+      const list = buildAll(state.branches, state.assets).filter(function(i) {
+        return i.report.stats.branches > 0;
       });
-      if (empty.length === 3) {
+      if (!list.length) {
         toast("三个作用域都还没有内容");
-        return list;
+        return [];
       }
-      downloadAll(state.branches, state.assets);
-      toast("已导出 " + list.filter(function(i) {
-        return i.report.stats.branches;
-      }).map(function(i) {
-        return i.scope;
-      }).join(" / "));
+      list.forEach(function(item) {
+        recordExport(item.scope, item);
+      });
       return list;
+    }
+    function exportRecords() {
+      return state.exports.slice();
+    }
+    function deleteExportRecord(id) {
+      state.exports = state.exports.filter(function(r) {
+        return r.id !== id;
+      });
+      persistExports();
+      notify("exports");
     }
     function preview(scope, extraCss) {
       return buildLiveCss(scope, state.branches) + (extraCss ? "\n\n/* 本次回复预览 */\n" + extraCss : "");
@@ -3322,7 +3804,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         return null;
       }
       const tokenWritten = ensureToken(state.branches, asset, branchId);
-      if (tokenWritten) persistBranches();
+      if (tokenWritten) persistProject();
       const r = writeToBranch(branchId, generator.css, "APPEND", "generator");
       return { tokenWritten, lint: r.lint, branchId };
     }
@@ -3332,37 +3814,60 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       notify("settings");
     }
     async function clearAll() {
-      Object.keys(state.chats).forEach(function(nodeId) {
-        storage.dropChat(nodeId);
-      });
-      await storage.remove("ss.branches");
-      await storage.remove("ss.nodes");
+      for (let i = 0; i < state.projects.length; i++) {
+        const pid = state.projects[i].id;
+        for (let j = 0; j < NODES.length; j++) {
+          await storage.dropChat(pid, NODES[j].id);
+        }
+        await storage.remove(projectKey(pid));
+      }
+      await storage.remove("ss.projects");
+      await storage.remove("ss.activeProjectId");
       await storage.remove("ss.assets");
       await storage.remove("ss.settings");
-      state.branches = emptyBranches();
-      state.nodes = {};
-      state.chats = {};
+      await storage.remove("ss.exports");
+      await storage.remove("ss.presets");
+      state.projects = [];
+      state.presets = [];
+      state.exports = [];
       state.assets = [];
       state.settings = Object.assign({}, DEFAULT_SETTINGS);
-      state.activeNodeId = "plan";
+      state.chats = {};
       clearLive();
+      const project = newProject(DEFAULT_PROJECT_NAME);
+      await storage.set(projectKey(project.id), project);
+      state.projects = [projectMeta(project)];
+      await storage.set("ss.projects", state.projects);
+      await storage.set("ss.activeProjectId", project.id);
+      await loadProject(project.id);
       notify("all");
       toast("已清空全部数据");
     }
     async function boot() {
-      const migrated = await migrateIfNeeded();
-      state.branches = normalize(await storage.get("ss.branches", null));
-      state.nodes = await storage.get("ss.nodes", {}) || {};
+      const mig = await migrate();
+      state.presets = await storage.get("ss.presets", []) || [];
+      state.exports = await storage.get("ss.exports", []) || [];
       state.assets = await storage.get("ss.assets", []) || [];
       state.settings = Object.assign({}, DEFAULT_SETTINGS, await storage.get("ss.settings", {}) || {});
-      const wanted = state.settings.activeNodeId || "plan";
-      state.activeNodeId = getNode(wanted) ? wanted : "plan";
-      await ensureChat(state.activeNodeId);
+      let projects = await storage.get("ss.projects", []);
+      if (!Array.isArray(projects) || !projects.length) {
+        const project = newProject(DEFAULT_PROJECT_NAME);
+        await storage.set(projectKey(project.id), project);
+        projects = [projectMeta(project)];
+        await storage.set("ss.projects", projects);
+        await storage.set("ss.activeProjectId", project.id);
+      }
+      state.projects = projects;
+      const wantedPid = await storage.get("ss.activeProjectId", "") || projects[0].id;
+      const pid = projects.some(function(p) {
+        return p.id === wantedPid;
+      }) ? wantedPid : projects[0].id;
+      await loadProject(pid);
       state.loading = false;
       notify("all");
-      if (migrated) {
+      if (mig.migrated) {
         setTimeout(function() {
-          toast("已升级到 v0.2 架构，旧数据已清理");
+          toast("已升级到 v0.3：内容已归入「" + (state.project ? state.project.name : "我的美化") + "」");
         }, 400);
       }
     }
@@ -3376,13 +3881,30 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       confirm,
       boot,
       flushAll,
+      /* 方案 */
+      switchProject,
+      createProject,
+      renameProject,
+      duplicateProject: duplicateProject2,
+      deleteProject,
+      /* 节点 */
       switchNode,
       ensureChat,
       messages,
       toggleCollapse,
+      nodeState,
+      /* 提示词 */
+      promptCfg,
+      setPromptCfg,
       promptMode,
       setPromptMode,
-      nodeState,
+      promptText,
+      targets,
+      listPresets,
+      savePreset,
+      clonePreset: clonePreset2,
+      deletePreset,
+      /* 分支 */
       writeToBranch,
       writePart,
       writeAllParts,
@@ -3390,18 +3912,24 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       resetBranch,
       toggleBranch,
       lintFor,
+      /* 消息 */
       send,
       editMessage,
       deleteMessage,
       regenerate,
-      promptText,
-      targets,
+      /* 导出 */
+      buildScope,
+      recordExport,
       exportScope,
       exportAll,
+      exportRecords,
+      deleteExportRecord,
+      /* 预览 / 应用 */
       preview,
       applyLive,
       clearLive,
       liveApplied,
+      /* 素材 */
       addAsset,
       removeAsset,
       updateAsset,
@@ -3504,15 +4032,25 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   function renderSidebar(ctx, actions) {
     const state = ctx.state;
     const side = el("div", { class: "ss-side" });
+    const project = state.project || { name: "我的美化" };
+    const projectBtn = el("button", {
+      class: "ss-proj-btn",
+      title: "切换美化方案",
+      onclick: function() {
+        actions.openProjects();
+      }
+    }, [
+      el("div", { class: "ss-proj-btn__main" }, [
+        el("div", { class: "ss-proj-btn__name", text: project.name }),
+        el("div", {
+          class: "ss-proj-btn__meta",
+          text: (state.projects.length || 1) + " 个方案 · " + writtenCount2(state.branches) + " 个分支有内容"
+        })
+      ]),
+      el("span", { class: "ss-proj-btn__chev" }, [svgIcon("chevron", 16)])
+    ]);
     side.appendChild(el("div", { class: "ss-side__head" }, [
-      el("div", { class: "ss-side__title", text: "美化" }),
-      el("button", {
-        class: "ss-icon-btn",
-        title: "提示词与部位",
-        onclick: function() {
-          actions.openPrompt();
-        }
-      }, [svgIcon("layers", 18)]),
+      projectBtn,
       el("button", {
         class: "ss-icon-btn ss-side__close",
         title: "收起",
@@ -3610,6 +4148,14 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     ]));
     return side;
   }
+  function writtenCount2(branches) {
+    let n = 0;
+    Object.keys(branches || {}).forEach(function(id) {
+      const b = branches[id];
+      if (b && b.css && b.css.trim()) n += 1;
+    });
+    return n;
+  }
 
   // src/core/image.js
   var MAX_EDGE = 1024;
@@ -3661,28 +4207,174 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     return { dataUrl, width: w, height: h, bytes };
   }
 
-  // src/ui/chat.js
-  function copyText(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).catch(function() {
-        fallbackCopy(text);
-      });
-      return;
+  // src/core/clipboard.js
+  async function copyText(text) {
+    const value = String(text == null ? "" : text);
+    if (!value) return { ok: false, reason: "empty" };
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+      try {
+        await navigator.clipboard.writeText(value);
+        return { ok: true, mode: "clipboard" };
+      } catch (err) {
+      }
     }
-    fallbackCopy(text);
-  }
-  function fallbackCopy(text) {
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.style.position = "fixed";
-    ta.style.opacity = "0";
-    document.body.appendChild(ta);
-    ta.select();
     try {
-      document.execCommand("copy");
+      const ta = document.createElement("textarea");
+      ta.value = value;
+      ta.setAttribute("readonly", "readonly");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.left = "0";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, value.length);
+      const ok = document.execCommand && document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok ? { ok: true, mode: "execCommand" } : { ok: false, reason: "execCommand-failed" };
     } catch (err) {
+      return { ok: false, reason: err && err.message || "unknown" };
     }
-    document.body.removeChild(ta);
+  }
+  function formatSize(chars) {
+    if (chars < 1024) return chars + " 字符";
+    return (chars / 1024).toFixed(1) + " KB";
+  }
+
+  // src/core/markdown.js
+  function escapeHtml(text) {
+    return String(text == null ? "" : text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+  var INLINE_RE = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`|\[[^\]\n]+\]\(https?:\/\/[^)\s]+\))/g;
+  function inlineNodes(text) {
+    const frag = document.createDocumentFragment();
+    const src = String(text || "");
+    let last = 0;
+    let m;
+    INLINE_RE.lastIndex = 0;
+    while (m = INLINE_RE.exec(src)) {
+      if (m.index > last) frag.appendChild(document.createTextNode(src.slice(last, m.index)));
+      const token = m[0];
+      if (token.indexOf("**") === 0) {
+        const b = document.createElement("strong");
+        b.textContent = token.slice(2, -2);
+        frag.appendChild(b);
+      } else if (token.indexOf("`") === 0) {
+        const c = document.createElement("code");
+        c.className = "ss-md__inline";
+        c.textContent = token.slice(1, -1);
+        frag.appendChild(c);
+      } else if (token.indexOf("[") === 0) {
+        const mm = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/.exec(token);
+        const a = document.createElement("span");
+        a.className = "ss-md__link";
+        a.textContent = mm ? mm[1] : token;
+        a.title = mm ? mm[2] : "";
+        frag.appendChild(a);
+      } else {
+        const i = document.createElement("em");
+        i.textContent = token.slice(1, -1);
+        frag.appendChild(i);
+      }
+      last = m.index + token.length;
+    }
+    if (last < src.length) frag.appendChild(document.createTextNode(src.slice(last)));
+    return frag;
+  }
+  function renderMarkdown(raw) {
+    const frag = document.createDocumentFragment();
+    const lines = String(raw || "").replace(/\r\n?/g, "\n").split("\n");
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i];
+      if (/^\s*```/.test(line)) {
+        const lang = line.replace(/^\s*```/, "").trim();
+        const buf2 = [];
+        i += 1;
+        while (i < lines.length && !/^\s*```/.test(lines[i])) {
+          buf2.push(lines[i]);
+          i += 1;
+        }
+        i += 1;
+        const pre = document.createElement("pre");
+        pre.className = "ss-md__code";
+        if (lang) pre.dataset.lang = lang;
+        pre.textContent = buf2.join("\n");
+        frag.appendChild(pre);
+        continue;
+      }
+      if (/^\s*(---+|\*\*\*+)\s*$/.test(line)) {
+        const hr = document.createElement("div");
+        hr.className = "ss-md__hr";
+        frag.appendChild(hr);
+        i += 1;
+        continue;
+      }
+      const h = /^(#{1,4})\s+(.*)$/.exec(line);
+      if (h) {
+        const level = Math.min(4, h[1].length + 1);
+        const node = document.createElement("h" + level);
+        node.className = "ss-md__h";
+        node.appendChild(inlineNodes(escapeHtml(h[2])));
+        frag.appendChild(node);
+        i += 1;
+        continue;
+      }
+      if (/^\s*>\s?/.test(line)) {
+        const buf2 = [];
+        while (i < lines.length && /^\s*>\s?/.test(lines[i])) {
+          buf2.push(escapeHtml(lines[i].replace(/^\s*>\s?/, "")));
+          i += 1;
+        }
+        const quote = document.createElement("blockquote");
+        quote.className = "ss-md__quote";
+        quote.appendChild(inlineNodes(buf2.join("\n")));
+        frag.appendChild(quote);
+        continue;
+      }
+      if (/^\s*([-*]|\d+\.)\s+/.test(line)) {
+        const ordered = /^\s*\d+\./.test(line);
+        const list = document.createElement(ordered ? "ol" : "ul");
+        list.className = "ss-md__list";
+        while (i < lines.length && /^\s*([-*]|\d+\.)\s+/.test(lines[i])) {
+          const indent = /^\s*/.exec(lines[i])[0].replace(/\t/g, "  ").length;
+          const content = lines[i].replace(/^\s*([-*]|\d+\.)\s+/, "");
+          const li = document.createElement("li");
+          if (indent >= 2) li.className = "ss-md__li--sub";
+          li.appendChild(inlineNodes(escapeHtml(content)));
+          list.appendChild(li);
+          i += 1;
+        }
+        frag.appendChild(list);
+        continue;
+      }
+      if (!line.trim()) {
+        i += 1;
+        continue;
+      }
+      const buf = [];
+      while (i < lines.length && lines[i].trim() && !/^\s*```/.test(lines[i]) && !/^(#{1,4})\s+/.test(lines[i]) && !/^\s*>\s?/.test(lines[i]) && !/^\s*([-*]|\d+\.)\s+/.test(lines[i]) && !/^\s*(---+)+\s*$/.test(lines[i])) {
+        buf.push(escapeHtml(lines[i]));
+        i += 1;
+      }
+      const p = document.createElement("p");
+      p.className = "ss-md__p";
+      p.appendChild(inlineNodes(buf.join("\n")));
+      frag.appendChild(p);
+    }
+    return frag;
+  }
+
+  // src/ui/chat.js
+  function copyWithToast(ctx, text, okText) {
+    copyText(text).then(function(r) {
+      ctx.toast(r.ok ? okText || "已复制" : "复制失败，请长按选择复制");
+    });
+  }
+  function markdownNode(text) {
+    const box = el("div", { class: "ss-msg__plain" });
+    box.appendChild(renderMarkdown(text));
+    return box;
   }
   function suggestionsFor(nodeId) {
     const node = getNode(nodeId);
@@ -3788,11 +4480,11 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       }),
       lintHint
     ]);
-    const card = el("div", { class: "ss-card" }, [head, rows, code, foot]);
+    const card2 = el("div", { class: "ss-card" }, [head, rows, code, foot]);
     head.addEventListener("click", function() {
-      card.classList.toggle("ss-card--open");
+      card2.classList.toggle("ss-card--open");
     });
-    return card;
+    return card2;
   }
   function actionRow(items) {
     const row2 = el("div", { class: "ss-msg__actions" });
@@ -3855,8 +4547,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
           ctx.notify("chat");
         } },
         { label: "复制", icon: "copy", onClick: function() {
-          copyText(msg.text || "");
-          ctx.toast("已复制");
+          copyWithToast(ctx, msg.text || "");
         } },
         {
           label: "删除",
@@ -3870,13 +4561,12 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       ]));
       return wrap;
     }
-    wrap.appendChild(el("div", { class: "ss-msg__plain", text: msg.text || "" }));
+    wrap.appendChild(markdownNode(msg.text || ""));
     if (msg.parts && msg.parts.length) wrap.appendChild(buildCard(ctx, actions, msg));
     if (msg.note) wrap.appendChild(el("div", { class: "ss-msg__meta", text: msg.note }));
     wrap.appendChild(actionRow([
       { label: "复制", icon: "copy", onClick: function() {
-        copyText(msg.raw || msg.text || "");
-        ctx.toast("已复制");
+        copyWithToast(ctx, msg.raw || msg.text || "");
       } },
       { label: "重生成", icon: "refresh", onClick: function() {
         ctx.regenerate(msg.id);
@@ -4050,71 +4740,89 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   }
 
   // src/ui/promptSheet.js
-  function renderPromptSheet(ctx, actions, initialMode) {
+  function switchEl(on, onToggle, title) {
+    const btn = el("button", {
+      class: "ss-switch" + (on ? " ss-switch--on" : ""),
+      title: title || ""
+    });
+    btn.addEventListener("click", onToggle);
+    return btn;
+  }
+  function settingRow(label, hint, right) {
+    return el("div", { class: "ss-setting" }, [
+      el("div", { class: "ss-setting__main" }, [
+        el("div", { class: "ss-setting__label", text: label }),
+        hint ? el("div", { class: "ss-setting__hint", text: hint }) : null
+      ]),
+      right
+    ]);
+  }
+  function renderPromptSheet(ctx, actions) {
     const nodeId = ctx.state.activeNodeId;
     const node = getNode(nodeId);
     const scope = scopeOf(nodeId);
-    let mode = initialMode || ctx.promptMode(nodeId);
-    const tabs = el("div", { class: "ss-tabs" });
+    const cfg = ctx.promptCfg(nodeId);
+    const badge = el("span", { class: "ss-sizebadge" });
+    const body = el("div", { class: "ss-panel-body" });
     const pre = el("pre", { class: "ss-pre" });
-    const list = el("div", { class: "ss-branch-list" });
-    const note = el("div", { class: "ss-panel-note" });
-    function renderTabs() {
-      tabs.replaceChildren();
-      [["condensed", "精炼参考"], ["full", "完整参考"]].forEach(function(pair) {
-        const tab = el("button", {
-          class: "ss-tab" + (mode === pair[0] ? " ss-tab--on" : ""),
-          text: pair[1]
-        });
-        tab.addEventListener("click", function() {
-          mode = pair[0];
-          ctx.setPromptMode(nodeId, mode);
-          renderAll();
-        });
-        tabs.appendChild(tab);
+    const branchList = el("div", { class: "ss-branch-list" });
+    const warn = el("div", { class: "ss-panel-note", style: { color: "var(--ss-danger)" } });
+    const presetBar = el("div", { class: "ss-presetbar" });
+    function renderBadge() {
+      const text = ctx.promptText(nodeId);
+      badge.textContent = "约 " + Math.round(text.length / 1024 * 10) / 10 + " KB · 约 " + (estimateTokens(text) / 1e3).toFixed(1) + "k tokens";
+      warn.textContent = text.length > 12 * 1024 ? "注入超过 12KB，建议关掉「完整参考」或切到单个部位对话。" : "";
+    }
+    function renderPresets() {
+      presetBar.replaceChildren();
+      const list = ctx.listPresets(scope || "");
+      presetBar.appendChild(el("span", { class: "ss-presetbar__label", text: "提示词预设" }));
+      const select = el("select", { class: "ss-select" });
+      select.appendChild(el("option", { value: "", text: "不使用预设" }));
+      list.forEach(function(p) {
+        const opt = el("option", { value: p.id, text: p.name + (p.builtin ? "（内置）" : "") });
+        if (p.id === cfg.presetId) opt.selected = true;
+        select.appendChild(opt);
       });
-      tabs.appendChild(el("button", {
+      select.addEventListener("change", function() {
+        cfg.presetId = select.value;
+        ctx.setPromptCfg(nodeId, { presetId: select.value });
+        renderAll();
+      });
+      presetBar.appendChild(select);
+      presetBar.appendChild(el("button", {
         class: "ss-mini-btn",
-        style: { marginLeft: "auto" },
         onclick: function() {
-          if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(pre.textContent).catch(function() {
-            });
-          }
-          ctx.toast("已复制提示词");
+          actions.openPresets();
         }
-      }, [svgIcon("copy", 14), el("span", { text: "复制" })]));
+      }, [svgIcon("edit", 14), el("span", { text: "编辑" })]));
     }
     function renderAll() {
-      renderTabs();
-      const text = ctx.promptText(nodeId, mode);
+      const text = ctx.promptText(nodeId);
       pre.textContent = text;
-      note.textContent = "完整参考会把《全部 css 整理版》对应小节全文拼进去，token 明显变多；只在需要对照写法时切换。 当前注入约 " + Math.round(text.length / 1024) + " KB。";
+      badge.textContent = "约 " + Math.round(text.length / 1024 * 10) / 10 + " KB · 约 " + (estimateTokens(text) / 1e3).toFixed(1) + "k tokens";
+      warn.textContent = text.length > 12 * 1024 ? "注入超过 12KB，建议关掉「完整参考」或切到单个部位对话。" : "";
       const items = ctx.targets(nodeId);
-      list.replaceChildren();
+      branchList.replaceChildren();
       if (!items.length) {
-        list.appendChild(el("div", {
+        branchList.appendChild(el("div", {
           class: "ss-panel-note",
-          style: { paddingTop: "12px" },
           text: "这个对话不产出具体部位 CSS（风格规划用）。"
         }));
         return;
       }
-      list.appendChild(el("div", {
+      branchList.appendChild(el("div", {
         class: "ss-panel-note",
-        style: { paddingTop: "12px" },
-        text: "目标部位（" + items.length + "）"
+        text: "目标部位（" + items.length + "）· 右侧开关控制是否参与导出与预览"
       }));
       items.forEach(function(item) {
-        const sw = el("button", {
-          class: "ss-switch" + (item.disabled ? "" : " ss-switch--on"),
-          title: item.disabled ? "已关闭，不参与导出与预览" : "参与导出与预览"
-        });
-        sw.addEventListener("click", function() {
-          ctx.toggleBranch(item.id, item.disabled);
+        const sw = switchEl(!item.disabled, function() {
+          const next = item.disabled;
+          ctx.toggleBranch(item.id, next);
+          ctx.toast("「" + item.label + "」" + (next ? "已参与导出与预览" : "已关闭"));
           renderAll();
-        });
-        list.appendChild(el("div", { class: "ss-branch-item" }, [
+        }, item.disabled ? "已关闭" : "参与导出与预览");
+        branchList.appendChild(el("div", { class: "ss-branch-item" }, [
           el("div", { class: "ss-branch-item__main" }, [
             el("div", { class: "ss-branch-item__name", text: item.label }),
             el("div", {
@@ -4126,24 +4834,68 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         ]));
       });
     }
-    renderAll();
-    return el("div", {
-      style: { display: "flex", flexDirection: "column", flex: "1 1 auto", minHeight: "0" }
-    }, [
-      el("div", { class: "ss-sheet__head" }, [
-        el("div", { class: "ss-sheet__title", text: "注入的提示词" }),
-        el("button", { class: "ss-icon-btn", onclick: actions.closePrompt }, [svgIcon("close", 18)])
-      ]),
-      el("div", {
-        class: "ss-panel-note",
-        style: { paddingTop: "10px" },
-        text: breadcrumb(nodeId) + (scope ? " · " + SCOPE_LABEL[scope] : "") + (node ? " · " + node.type : "")
-      }),
-      tabs,
-      note,
-      pre,
-      list
+    const hooksSwitch = switchEl(cfg.injectHooks, function() {
+      cfg.injectHooks = !cfg.injectHooks;
+      ctx.setPromptCfg(nodeId, { injectHooks: cfg.injectHooks });
+      hooksSwitch.className = "ss-switch" + (cfg.injectHooks ? " ss-switch--on" : "");
+      renderAll();
+      ctx.toast(cfg.injectHooks ? "已注入钩子白名单" : "已关闭钩子白名单注入");
+    });
+    const existingSwitch = switchEl(cfg.injectExisting, function() {
+      cfg.injectExisting = !cfg.injectExisting;
+      ctx.setPromptCfg(nodeId, { injectExisting: cfg.injectExisting });
+      existingSwitch.className = "ss-switch" + (cfg.injectExisting ? " ss-switch--on" : "");
+      renderAll();
+      ctx.toast(cfg.injectExisting ? "已注入该部位已有 CSS" : "已关闭已有 CSS 注入");
+    });
+    const refTabs = el("div", { class: "ss-seg" });
+    [["off", "不注入"], ["condensed", "精炼"], ["full", "完整"]].forEach(function(pair) {
+      const seg = el("button", {
+        class: "ss-seg__item" + (cfg.refMode === pair[0] ? " ss-seg__item--on" : ""),
+        text: pair[1]
+      });
+      seg.addEventListener("click", function() {
+        cfg.refMode = pair[0];
+        ctx.setPromptCfg(nodeId, { refMode: pair[0] });
+        Array.prototype.forEach.call(refTabs.children, function(c, i) {
+          c.className = "ss-seg__item" + (["off", "condensed", "full"][i] === cfg.refMode ? " ss-seg__item--on" : "");
+        });
+        renderAll();
+      });
+      refTabs.appendChild(seg);
+    });
+    const head = el("div", { class: "ss-sheet__head" }, [
+      el("div", { class: "ss-sheet__title", text: "提示词" }),
+      badge,
+      el("button", {
+        class: "ss-icon-btn",
+        title: "复制提示词",
+        onclick: function() {
+          copyText(ctx.promptText(nodeId)).then(function(r) {
+            const text = ctx.promptText(nodeId);
+            ctx.toast(r.ok ? "已复制提示词（" + formatSize(text.length) + "）" : "复制失败，请长按选择复制");
+          });
+        }
+      }, [svgIcon("copy", 18)]),
+      el("button", { class: "ss-icon-btn", onclick: actions.closePrompt }, [svgIcon("close", 18)])
     ]);
+    const crumb = breadcrumb(nodeId).split(" · ").filter(function(s, i, arr) {
+      return arr.indexOf(s) === i;
+    }).join(" › ");
+    const settings = el("div", { class: "ss-settings" }, [
+      el("div", { class: "ss-panel-note", text: (ctx.state.project ? ctx.state.project.name + " › " : "") + crumb }),
+      settingRow("注入钩子白名单", "默认关闭；开启会把该作用域的可用 class 全列给 AI", hooksSwitch),
+      settingRow("注入已有 CSS", "默认关闭；开启会把该部位当前代码一起发过去", existingSwitch),
+      settingRow("参考片段", "《全部 css 整理版》里对应小节的写法参照", refTabs),
+      presetBar
+    ]);
+    body.appendChild(warn);
+    body.appendChild(el("div", { class: "ss-panel-note", text: "本次实际注入（与发送给 AI 的完全一致）" }));
+    body.appendChild(pre);
+    body.appendChild(branchList);
+    renderPresets();
+    renderAll();
+    return el("div", { class: "ss-prompt-panel" }, [head, settings, body]);
   }
 
   // src/ui/exportSheet.js
@@ -4160,39 +4912,416 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
           el("div", { class: "ss-export-row__name", text: SCOPE_LABEL[scope] + "皮肤" }),
           el("div", {
             class: "ss-export-row__hint",
-            text: errs ? errs + " 个错误 · " + warns + " 个提醒" : warns ? warns + " 个提醒" : "体检通过"
+            text: written ? errs ? errs + " 个错误 · " + warns + " 个提醒" : warns ? warns + " 个提醒" : "体检通过" : "还没有内容"
           })
         ]),
         el("span", { class: "ss-export-row__count", text: written + "/" + total }),
-        svgIcon("down", 16)
+        svgIcon("chevron", 16)
       ]);
       row2.addEventListener("click", function() {
-        ctx.exportScope(scope);
-        actions.closeExport();
+        actions.openExportResult(scope);
       });
       body.appendChild(row2);
     });
     const allRow = el("button", { class: "ss-export-row" }, [
       el("div", { class: "ss-export-row__main" }, [
-        el("div", { class: "ss-export-row__name", text: "全部（依次下载三份）" }),
-        el("div", { class: "ss-export-row__hint", text: "线上.css / 线下.css / 全局.css" })
+        el("div", { class: "ss-export-row__name", text: "全部（三份依次生成）" }),
+        el("div", { class: "ss-export-row__hint", text: "线上 / 线下 / 全局 各一份，可在结果页逐个保存" })
       ]),
-      svgIcon("down", 16)
+      svgIcon("chevron", 16)
     ]);
     allRow.addEventListener("click", function() {
-      ctx.exportAll();
-      actions.closeExport();
+      actions.openExportResult("all");
     });
     body.appendChild(allRow);
-    return el("div", {
-      style: { display: "flex", flexDirection: "column", flex: "1 1 auto", minHeight: "0" }
-    }, [
+    return el("div", { class: "ss-sheet-inner" }, [
       el("div", { class: "ss-sheet__head" }, [
         el("div", { class: "ss-sheet__title", text: "导出 CSS" }),
         el("button", { class: "ss-icon-btn", onclick: actions.closeExport }, [svgIcon("close", 18)])
       ]),
       body
     ]);
+  }
+
+  // src/core/saveFile.js
+  function filenameSafe(name) {
+    return String(name || "skin.css").replace(/[\\/:*?"<>|\s]+/g, "-");
+  }
+  function saveFile(name, content, mime) {
+    const fileName2 = filenameSafe(name);
+    let url = "";
+    try {
+      const blob = new Blob([String(content == null ? "" : content)], {
+        type: mime || "text/css;charset=utf-8"
+      });
+      url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName2;
+      a.rel = "noopener";
+      a.style.display = "none";
+      (document.documentElement || document.body).appendChild(a);
+      a.click();
+      setTimeout(function() {
+        if (a.parentNode) a.parentNode.removeChild(a);
+      }, 1500);
+      setTimeout(function() {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (err) {
+        }
+      }, 3e4);
+      return { ok: true, name: fileName2 };
+    } catch (err) {
+      if (url) {
+        try {
+          URL.revokeObjectURL(url);
+        } catch (e) {
+        }
+      }
+      return { ok: false, reason: err && err.message || "save-failed" };
+    }
+  }
+  function canShare(name, content, mime) {
+    try {
+      if (!navigator.canShare || typeof File !== "function") return false;
+      const file = new File([String(content || "")], filenameSafe(name), {
+        type: mime || "text/css;charset=utf-8"
+      });
+      return !!navigator.canShare({ files: [file] });
+    } catch (err) {
+      return false;
+    }
+  }
+  async function shareFile(name, content, mime) {
+    if (!canShare(name, content, mime)) return { ok: false, reason: "unsupported" };
+    try {
+      const file = new File([String(content || "")], filenameSafe(name), {
+        type: mime || "text/css;charset=utf-8"
+      });
+      await navigator.share({ files: [file], title: filenameSafe(name) });
+      return { ok: true };
+    } catch (err) {
+      return { ok: false, reason: err && err.message || "share-cancelled" };
+    }
+  }
+
+  // src/ui/exportResult.js
+  function withLineNumbers(css) {
+    const lines = String(css || "").split("\n");
+    const nums = el("div", { class: "ss-code__nums" });
+    const code = el("pre", { class: "ss-code__text" });
+    nums.textContent = lines.map(function(_, i) {
+      return String(i + 1);
+    }).join("\n");
+    code.textContent = lines.join("\n");
+    return el("div", { class: "ss-codebox" }, [nums, code]);
+  }
+  function renderExportResult(ctx, actions, initialScope) {
+    let scope = initialScope === "all" ? "online" : initialScope || "online";
+    let showAll = initialScope === "all";
+    const tabs = el("div", { class: "ss-pv__tabs" });
+    const head = el("div", { class: "ss-screen__bar" });
+    const meta = el("div", { class: "ss-exportmeta" });
+    const body = el("div", { class: "ss-exportbody" });
+    const foot = el("div", { class: "ss-pv__foot" });
+    const history = el("div", { class: "ss-history" });
+    function built() {
+      return ctx.buildScope(scope);
+    }
+    function renderTabs() {
+      tabs.replaceChildren();
+      ["online", "offline", "global"].forEach(function(id) {
+        const tab = el("button", {
+          class: "ss-tab" + (scope === id ? " ss-tab--on" : ""),
+          text: SCOPE_LABEL[id]
+        });
+        tab.addEventListener("click", function() {
+          scope = id;
+          showAll = false;
+          renderTabs();
+          renderBody();
+          renderFoot();
+        });
+        tabs.appendChild(tab);
+      });
+    }
+    function renderBody() {
+      const b = built();
+      body.replaceChildren();
+      if (!b.report.stats.branches) {
+        body.appendChild(el("div", { class: "ss-empty" }, [
+          el("h2", { text: SCOPE_LABEL[scope] + "还没有内容" }),
+          el("p", { text: "回到对话里写几条，或换一个作用域。" })
+        ]));
+        meta.textContent = "";
+        return;
+      }
+      meta.textContent = b.name + " · " + b.report.stats.branches + " 个分支 · " + Math.round(b.css.length / 1024) + " KB" + (b.report.errors.length ? " · " + b.report.errors.length + " 个错误" : "") + (b.report.warnings.length ? " · " + b.report.warnings.length + " 个提醒" : "");
+      body.appendChild(withLineNumbers(b.css));
+    }
+    function toastResult(r, okText, failText) {
+      ctx.toast(r.ok ? okText : failText + (r.reason ? "：" + r.reason : ""));
+    }
+    function record() {
+      const b = built();
+      if (!b.report.stats.branches) return;
+      ctx.recordExport(scope, b);
+      renderHistory();
+    }
+    function renderFoot() {
+      foot.replaceChildren();
+      const b = built();
+      const disabled = !b.report.stats.branches;
+      const copyBtn = el("button", {
+        class: "ss-btn ss-btn--primary",
+        style: { flex: "1 1 0" },
+        text: "复制全部"
+      });
+      copyBtn.disabled = disabled;
+      copyBtn.addEventListener("click", function() {
+        copyText(built().css).then(function(r) {
+          toastResult(r, "已复制 " + formatSize(built().css.length), "复制失败，请长按选择复制");
+          if (r.ok) record();
+        });
+      });
+      const saveBtn = el("button", { class: "ss-btn ss-btn--ghost", text: "保存为文件" });
+      saveBtn.disabled = disabled;
+      saveBtn.addEventListener("click", function() {
+        const cur = built();
+        const r = saveFile(cur.name, cur.css);
+        toastResult(r, "已交给系统保存：" + cur.name, "保存失败");
+        if (!r.ok) ctx.toast("保存没成功，可以用「复制全部」再粘到美化面板");
+        else record();
+      });
+      foot.appendChild(copyBtn);
+      foot.appendChild(saveBtn);
+      if (canShare(b.name, b.css)) {
+        const shareBtn = el("button", { class: "ss-btn ss-btn--ghost", text: "分享" });
+        shareBtn.addEventListener("click", function() {
+          const cur = built();
+          shareFile(cur.name, cur.css).then(function(r) {
+            toastResult(r, "已打开分享", "分享未完成");
+            if (r.ok) record();
+          });
+        });
+        foot.appendChild(shareBtn);
+      }
+      if (showAll) {
+        const allBtn = el("button", {
+          class: "ss-btn ss-btn--ghost",
+          text: "三份都保存"
+        });
+        allBtn.addEventListener("click", function() {
+          const list = ["online", "offline", "global"].map(function(id) {
+            return ctx.buildScope(id);
+          }).filter(function(b2) {
+            return b2.report.stats.branches > 0;
+          });
+          if (!list.length) {
+            ctx.toast("三个作用域都还没有内容");
+            return;
+          }
+          list.forEach(function(b2, i) {
+            setTimeout(function() {
+              saveFile(b2.name, b2.css);
+              ctx.recordExport(b2.scope, b2);
+              if (i === list.length - 1) {
+                ctx.toast("已依次生成 " + list.length + " 份文件");
+                renderHistory();
+              }
+            }, i * 350);
+          });
+        });
+        foot.appendChild(allBtn);
+      }
+    }
+    function renderHistory() {
+      const list = ctx.exportRecords();
+      history.replaceChildren();
+      const title = el("button", { class: "ss-history__head" }, [
+        el("span", { text: "历史版本（" + list.length + "）" }),
+        svgIcon("chevron", 14)
+      ]);
+      const box = el("div", { class: "ss-history__list", style: { display: "none" } });
+      title.addEventListener("click", function() {
+        box.style.display = box.style.display === "none" ? "block" : "none";
+      });
+      history.appendChild(title);
+      list.forEach(function(rec) {
+        const row2 = el("div", { class: "ss-history__row" }, [
+          el("button", { class: "ss-history__main" }, [
+            el("div", { class: "ss-history__name", text: rec.name }),
+            el("div", {
+              class: "ss-history__meta",
+              text: (SCOPE_LABEL[rec.scope] || rec.scope) + " · " + new Date(rec.at).toLocaleString("zh-CN") + " · " + formatSize((rec.css || "").length) + (rec.truncated ? "（已截断）" : "")
+            })
+          ]),
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              copyText(rec.css || "").then(function(r) {
+                ctx.toast(r.ok ? "已复制历史版本" : "复制失败");
+              });
+            }
+          }, [svgIcon("copy", 14), el("span", { text: "复制" })]),
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              ctx.deleteExportRecord(rec.id);
+              renderHistory();
+            }
+          }, [svgIcon("trash", 14)])
+        ]);
+        box.appendChild(row2);
+      });
+      if (!list.length) {
+        box.appendChild(el("div", { class: "ss-panel-note", text: "还没有导出记录" }));
+      }
+      history.appendChild(box);
+    }
+    head.appendChild(el("button", { class: "ss-icon-btn", onclick: actions.closeScreen }, [svgIcon("back", 18)]));
+    head.appendChild(el("div", { class: "ss-crumb__main", style: { flex: "1 1 auto", textAlign: "center" }, text: "导出结果" }));
+    head.appendChild(el("button", { class: "ss-icon-btn", onclick: actions.closeScreen }, [svgIcon("close", 18)]));
+    renderTabs();
+    renderBody();
+    renderFoot();
+    renderHistory();
+    return el("div", { class: "ss-exportpage" }, [head, tabs, meta, body, foot, history]);
+  }
+
+  // src/ui/presetEditor.js
+  function renderPresetEditor(ctx, actions) {
+    const page = el("div", { class: "ss-exportpage" });
+    const head = el("div", { class: "ss-screen__bar" });
+    const content = el("div", { class: "ss-scroll-page" });
+    head.appendChild(el("button", { class: "ss-icon-btn", onclick: actions.closeScreen }, [svgIcon("back", 18)]));
+    head.appendChild(el("div", { class: "ss-crumb__main", style: { flex: "1 1 auto", textAlign: "center" }, text: "提示词预设" }));
+    head.appendChild(el("button", {
+      class: "ss-icon-btn",
+      title: "新建预设",
+      onclick: function() {
+        openEditor(null);
+      }
+    }, [svgIcon("plus", 18)]));
+    function renderList() {
+      clear(content);
+      content.appendChild(el("div", {
+        class: "ss-panel-note",
+        text: "预设会追加到系统提示词的末尾，用来写风格取向、禁令与验收标准；每个对话在提示词面板里选一套。"
+      }));
+      ctx.listPresets("").forEach(function(p) {
+        const row2 = el("div", { class: "ss-preset-row" }, [
+          el("button", { class: "ss-preset-row__main" }, [
+            el("div", { class: "ss-preset-row__name", text: p.name }),
+            el("div", {
+              class: "ss-preset-row__meta",
+              text: (p.builtin ? "内置 · 只读" : "自定义") + " · " + (p.scope === "*" ? "全作用域" : SCOPE_LABEL[p.scope] || p.scope) + " · " + (p.text || "").length + " 字"
+            })
+          ]),
+          el("button", {
+            class: "ss-mini-btn",
+            title: "复制一份再改",
+            onclick: function() {
+              const copy = ctx.clonePreset(p);
+              ctx.toast("已复制为「" + copy.name + "」");
+              renderList();
+            }
+          }, [svgIcon("copy", 14), el("span", { text: "复制" })]),
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              openEditor(p);
+            }
+          }, [svgIcon("edit", 14), el("span", { text: p.builtin ? "查看" : "编辑" })])
+        ]);
+        content.appendChild(row2);
+      });
+    }
+    function openEditor(preset) {
+      const isNew = !preset;
+      const readOnly = !!(preset && preset.builtin);
+      const nameInput = el("input", {
+        class: "ss-field__input",
+        placeholder: "预设名称",
+        value: preset ? preset.name : ""
+      });
+      const scopeSelect = el("select", { class: "ss-select" });
+      [["*", "全作用域"], ["online", "线上"], ["offline", "线下"], ["global", "全局"]].forEach(function(pair) {
+        const opt = el("option", { value: pair[0], text: pair[1] });
+        if ((preset ? preset.scope : "*") === pair[0]) opt.selected = true;
+        scopeSelect.appendChild(opt);
+      });
+      const textarea = el("textarea", {
+        class: "ss-preset-editor",
+        placeholder: "例如：整体取向、允许的颜色、禁止的做法、验收标准…"
+      });
+      textarea.value = preset ? preset.text : "";
+      if (readOnly) {
+        nameInput.setAttribute("disabled", "disabled");
+        textarea.setAttribute("disabled", "disabled");
+      }
+      const pageBox = el("div", { class: "ss-preset-editorbox" }, [
+        el("div", { class: "ss-panel-note", text: isNew ? "新建预设" : readOnly ? "内置预设（只读，可复制后改）" : "编辑预设" }),
+        nameInput,
+        scopeSelect,
+        textarea
+      ]);
+      const foot = el("div", { class: "ss-pv__foot" });
+      if (isNew || !readOnly) {
+        foot.appendChild(el("button", {
+          class: "ss-btn ss-btn--primary",
+          style: { flex: "1 1 0" },
+          text: "保存",
+          onclick: function() {
+            const name = nameInput.value.trim() || "未命名预设";
+            if (isNew) {
+              ctx.savePreset({ name, text: textarea.value, scope: scopeSelect.value });
+            } else {
+              ctx.savePreset({ id: preset.id, name, text: textarea.value, scope: scopeSelect.value });
+            }
+            ctx.toast("已保存预设");
+            renderList();
+          }
+        }));
+      } else {
+        foot.appendChild(el("button", {
+          class: "ss-btn ss-btn--primary",
+          style: { flex: "1 1 0" },
+          text: "复制为自定义",
+          onclick: function() {
+            const copy = ctx.clonePreset(preset);
+            ctx.toast("已复制为「" + copy.name + "」");
+            openEditor(copy);
+          }
+        }));
+      }
+      if (!isNew && !readOnly) {
+        foot.appendChild(el("button", {
+          class: "ss-btn ss-btn--danger",
+          text: "删除",
+          onclick: function() {
+            ctx.confirm({ title: "删除预设？", message: "引用它的对话会回退为「不使用预设」。" }).then(function(ok) {
+              if (!ok) return;
+              ctx.deletePreset(preset.id);
+              renderList();
+            });
+          }
+        }));
+      }
+      foot.appendChild(el("button", {
+        class: "ss-btn ss-btn--ghost",
+        text: "返回",
+        onclick: renderList
+      }));
+      clear(content);
+      content.appendChild(pageBox);
+      content.appendChild(foot);
+    }
+    page.appendChild(head);
+    page.appendChild(content);
+    renderList();
+    return page;
   }
 
   // src/core/generators.js
@@ -4398,7 +5527,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       }
       ctx.state.assets.forEach(function(asset) {
         const refs = ctx.assetRefs(asset);
-        const card = el("button", { class: "ss-asset" }, [
+        const card2 = el("button", { class: "ss-asset" }, [
           el("img", {
             src: asset.url,
             alt: asset.name,
@@ -4411,11 +5540,11 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
           refs.length ? el("span", { class: "ss-asset__used", text: "×" + refs.length }) : null,
           el("span", { class: "ss-asset__name", text: asset.name })
         ]);
-        card.addEventListener("click", function() {
+        card2.addEventListener("click", function() {
           selected = asset;
           renderPanel();
         });
-        grid.appendChild(card);
+        grid.appendChild(card2);
       });
     }
     function renderPanel() {
@@ -4644,51 +5773,100 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   }
 
   // src/ui/preview/baseline.css
-  var baseline_default = '/* 预览基线：抄宿主关键默认值，未写美化时应与 Roche 原版观感一致 */\n* {\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  font-family: -apple-system, "PingFang SC", system-ui, sans-serif;\n  background: #fff;\n  color: #111;\n  font-size: 14px;\n}\n.scene {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n}\n\n/* ---- 线上：聊天页 ---- */\n/* 与宿主一致：外壳锁高，只有消息区滚动，输入栏永远贴在底部 */\n.chat-viewport-root {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  overflow: hidden;\n}\nheader.chat-header {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 14px;\n  border-bottom: 1px solid #efefef;\n  background: #fff;\n}\n.chat-header-avatar {\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.chat-header-meta {\n  display: flex;\n  flex-direction: column;\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.chat-header-title {\n  font-size: 15px;\n  font-weight: 600;\n}\n.chat-header-online {\n  font-size: 10px;\n  color: #9ca3af;\n}\n.chat-header-button {\n  width: 30px;\n  height: 30px;\n  border-radius: 8px;\n  background: #f4f4f5;\n}\n.chat-scroll-area {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 14px;\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n  background: #fff;\n}\n.chat-message {\n  display: flex;\n  gap: 8px;\n  align-items: flex-start;\n}\n.chat-message--sent {\n  flex-direction: row-reverse;\n}\n.chat-message-avatar {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.chat-message-body {\n  max-width: 74%;\n  position: relative;\n}\n.chat-message-sender-name {\n  font-size: 10px;\n  color: #9ca3af;\n  margin-bottom: 4px;\n}\n.chat-message-time {\n  font-size: 10px;\n  color: #9ca3af;\n  text-align: center;\n}\n.bubble-received {\n  background: #f1f1f1;\n  color: #111;\n  border-radius: 18px 18px 18px 4px;\n  padding: 8px 12px;\n  line-height: 1.6;\n}\n.bubble-sent {\n  background: #000;\n  color: #fff;\n  border-radius: 18px 18px 4px;\n  padding: 8px 12px;\n  line-height: 1.6;\n}\n.bubble-tail-ios {\n  position: relative;\n  overflow: visible;\n}\n.bubble-tail-ios.bubble-received::before {\n  content: "";\n  position: absolute;\n  bottom: -1px;\n  left: -6px;\n  width: 16px;\n  height: 14px;\n  border-bottom-right-radius: 14px;\n  border-right: 10px solid #f1f1f1;\n}\n.bubble-tail-ios.bubble-sent::before {\n  content: "";\n  position: absolute;\n  bottom: -1px;\n  right: -6px;\n  width: 16px;\n  height: 14px;\n  border-bottom-left-radius: 14px;\n  border-left: 10px solid #000;\n}\n.quote-line {\n  border-left: 2px solid rgba(0, 0, 0, 0.18);\n  padding-left: 8px;\n  margin-bottom: 6px;\n  font-size: 12px;\n  opacity: 0.72;\n}\n.chat-card {\n  background: #fff;\n  border-radius: 12px;\n  padding: 10px 12px;\n  box-shadow: 0 0 0 1px #efefef;\n}\n.chat-card--transfer {\n  min-width: 160px;\n}\n.transfer-amount {\n  font-size: 22px;\n  font-weight: 600;\n}\n.transfer-currency {\n  font-size: 11px;\n  color: #9ca3af;\n  margin-left: 4px;\n}\n.chat-card--drip-invite {\n  padding: 12px;\n  min-width: 180px;\n}\n.invite-title {\n  font-size: 13px;\n  font-weight: 600;\n  margin-bottom: 8px;\n}\n.invite-actions {\n  display: flex;\n  gap: 8px;\n}\n.offline-invite__button {\n  flex: 1 1 auto;\n  height: 30px;\n  border: 0;\n  border-radius: 8px;\n  background: #f4f4f5;\n  color: #4b5563;\n  font-size: 12px;\n}\n.offline-invite__button--accept {\n  background: #000;\n  color: #fff;\n}\n.chat-plus-panel {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 4px;\n  padding: 10px;\n  border-top: 1px solid #efefef;\n}\n.chat-plus-action {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 6px;\n  padding: 10px 4px;\n  border-radius: 10px;\n  background: #fafafa;\n  font-size: 11px;\n  color: #4b5563;\n}\n.chat-plus-action__icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 6px;\n  background: #e5e7eb;\n}\n.chat-input-bar {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 8px 12px;\n  border-top: 1px solid #efefef;\n  background: #fff;\n}\n.chat-input-plus,\n.chat-input-heart {\n  width: 28px;\n  height: 28px;\n  border-radius: 8px;\n  background: #f4f4f5;\n}\n.chat-input-textarea {\n  flex: 1 1 auto;\n  min-height: 32px;\n  border-radius: 16px;\n  background: #f7f8fa;\n  padding: 7px 10px;\n  font-size: 13px;\n  color: #9ca3af;\n}\n.chat-input-send {\n  width: 30px;\n  height: 30px;\n  border-radius: 8px;\n  background: #000;\n}\n.typing-dot {\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background: #9ca3af;\n  display: inline-block;\n}\n\n/* ---- 全局：桌面 / 动态 / 导航 ---- */\n.global-page {\n  padding: 16px;\n  height: 100vh;\n  overflow-y: auto;\n}\n.grid {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 14px;\n  padding: 10px 0 18px;\n}\n.square-app-btn {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 6px;\n}\n.app-icon-bg {\n  width: 52px;\n  height: 52px;\n  border-radius: 14px;\n  background: #eef0f4;\n}\n.app-label {\n  font-size: 10px;\n  color: #888;\n}\n.post-item {\n  border-top: 1px solid #efefef;\n  border-bottom: 1px solid #efefef;\n  padding: 12px 0;\n}\n.post-author-name {\n  font-weight: 600;\n  font-size: 14px;\n}\n.post-timestamp {\n  font-size: 11px;\n  color: #9ca3af;\n  margin-left: 6px;\n}\n.post-body {\n  margin-top: 6px;\n  line-height: 1.7;\n  font-size: 14px;\n  color: #333;\n}\n.post-actions {\n  display: flex;\n  gap: 16px;\n  margin-top: 8px;\n}\n.post-action-btn {\n  font-size: 11px;\n  color: #9ca3af;\n}\n.bottom-nav {\n  display: flex;\n  justify-content: space-around;\n  padding: 10px 0;\n  border-top: 1px solid #efefef;\n  margin-top: 18px;\n}\n.bottom-nav span {\n  font-size: 11px;\n  color: #9ca3af;\n}\n\n/* ---- 线下：档案卡 ---- */\n.offline-mode {\n  padding: 16px;\n}\n.offline-card {\n  border: 1px solid #f4f4f5;\n  border-radius: 24px;\n  overflow: hidden;\n  background: #fff;\n}\n.offline-card-top {\n  padding: 16px;\n  border-bottom: 1px solid #f4f4f5;\n}\n.offline-card__sender {\n  font: 600 16px/1.3 Georgia, serif;\n}\n.offline-card__time {\n  font-size: 11px;\n  color: #a1a1aa;\n  margin-top: 4px;\n}\n.offline-card__body {\n  padding: 16px;\n}\n.offline-card__content-text {\n  font-size: 16px;\n  line-height: 2.05;\n  color: #52525b;\n}\n.offline-card__inline-quote {\n  border-left: 3px solid #e4e4e7;\n  padding-left: 10px;\n  font-style: italic;\n  color: #71717a;\n  margin: 10px 0;\n}\n.offline-card__footer {\n  display: flex;\n  gap: 12px;\n  padding: 12px 16px;\n  border-top: 1px solid #f4f4f5;\n  font-size: 10px;\n  color: #d4d4d8;\n}\n.offline-card__floor {\n  letter-spacing: 0.22em;\n}\n.offline-menu-row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 12px 4px;\n  border-bottom: 1px solid #f4f4f5;\n  font-size: 14px;\n  color: #3f3f46;\n}\n.noir-toggle-bg {\n  width: 38px;\n  height: 22px;\n  border-radius: 999px;\n  background: #e4e4e7;\n  display: inline-block;\n}\n';
+  var baseline_default = '/* 预览基线：抄宿主关键默认值，未写美化时应与 Roche 原版观感一致 */\n* {\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  height: 100%;\n}\nbody {\n  margin: 0;\n  font-family: -apple-system, "PingFang SC", system-ui, sans-serif;\n  background: #fff;\n  color: #111;\n  font-size: 14px;\n  -webkit-font-smoothing: antialiased;\n}\nbutton {\n  font: inherit;\n  color: inherit;\n  border: 0;\n  background: none;\n}\n\n/* ================= 线上：聊天页 ================= */\n.chat-viewport-root {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  overflow: hidden;\n  background: #fff;\n}\nheader.chat-header {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 12px;\n  border-bottom: 1px solid #efefef;\n  background: #fff;\n  flex: 0 0 auto;\n}\n.chat-header-avatar {\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.chat-header-meta {\n  flex: 1 1 auto;\n  min-width: 0;\n  display: flex;\n  flex-direction: column;\n}\n.chat-header-title {\n  font-size: 15px;\n  font-weight: 600;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.chat-header-subtitle {\n  font-size: 9px;\n  letter-spacing: 0.16em;\n  color: #9ca3af;\n}\n.chat-header-button {\n  width: 30px;\n  height: 30px;\n  border-radius: 8px;\n  background: #f4f4f5;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 13px;\n  color: #6b7280;\n  flex: 0 0 auto;\n}\n.chat-header-button--back,\n.chat-header-button--search,\n.chat-header-button--more {\n  background: transparent;\n  font-size: 16px;\n}\n.chat-scroll-area {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 14px;\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n  background: #fff;\n}\n.chat-message {\n  display: flex;\n  gap: 8px;\n  align-items: flex-start;\n}\n.chat-message--sent {\n  flex-direction: row-reverse;\n}\n.chat-message-avatar {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.chat-message-body {\n  max-width: 74%;\n  position: relative;\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n}\n.chat-message--sent .chat-message-body {\n  align-items: flex-end;\n}\n.chat-message-sender-name {\n  font-size: 10px;\n  color: #9ca3af;\n  margin-bottom: 2px;\n}\n.chat-message-time {\n  font-size: 10px;\n  color: #9ca3af;\n  text-align: center;\n}\n.chat-message-time--below {\n  text-align: right;\n}\n.chat-system-text {\n  align-self: center;\n  font-size: 11px;\n  color: #9ca3af;\n}\n.bubble-received {\n  background: #f1f1f1;\n  color: #111;\n  border-radius: 18px 18px 18px 4px;\n  padding: 8px 12px;\n  line-height: 1.6;\n}\n.bubble-sent {\n  background: #000;\n  color: #fff;\n  border-radius: 18px 18px 4px;\n  padding: 8px 12px;\n  line-height: 1.6;\n}\n.bubble-tail-ios {\n  position: relative;\n  overflow: visible;\n}\n.bubble-tail-ios.bubble-received::before {\n  content: "";\n  position: absolute;\n  bottom: -1px;\n  left: -6px;\n  width: 16px;\n  height: 14px;\n  border-bottom-right-radius: 14px;\n  border-right: 10px solid #f1f1f1;\n}\n.bubble-tail-ios.bubble-sent::before {\n  content: "";\n  position: absolute;\n  bottom: -1px;\n  right: -6px;\n  width: 16px;\n  height: 14px;\n  border-bottom-left-radius: 14px;\n  border-left: 10px solid #000;\n}\n.quote-line {\n  border-left: 2px solid rgba(0, 0, 0, 0.18);\n  padding-left: 8px;\n  margin-bottom: 4px;\n  font-size: 12px;\n  opacity: 0.72;\n  max-width: 74%;\n}\n.typing-dot {\n  display: inline-block;\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background: #9ca3af;\n}\n\n/* 通用卡片 */\n.chat-card {\n  background: #fff;\n  border-radius: 12px;\n  box-shadow: 0 0 0 1px #efefef;\n  overflow: hidden;\n}\n.chat-card__caption {\n  padding: 6px 10px;\n  font-size: 10px;\n  color: #9ca3af;\n}\n.chat-card--transfer {\n  min-width: 190px;\n  padding: 12px;\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n}\n.transfer-head {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n}\n.transfer-icon {\n  width: 26px;\n  height: 26px;\n  border-radius: 50%;\n  background: #f1f1f1;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 13px;\n}\n.transfer-label {\n  font-size: 13px;\n  font-weight: 600;\n  flex: 1 1 auto;\n}\n.transfer-status {\n  font-size: 11px;\n  color: #9ca3af;\n}\n.transfer-amount {\n  font-size: 22px;\n  font-weight: 600;\n}\n.transfer-note {\n  font-size: 11px;\n  color: #9ca3af;\n}\n.chat-card--voice {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 14px;\n  min-width: 120px;\n}\n.chat-voice-wave {\n  display: inline-flex;\n  align-items: center;\n  gap: 2px;\n  height: 16px;\n}\n.chat-voice-wave i {\n  display: block;\n  width: 2px;\n  border-radius: 2px;\n  background: #111;\n  height: 6px;\n}\n.chat-voice-wave i:nth-child(2) { height: 12px; }\n.chat-voice-wave i:nth-child(3) { height: 9px; }\n.chat-voice-wave i:nth-child(4) { height: 14px; }\n.chat-voice-wave i:nth-child(5) { height: 8px; }\n.chat-voice-wave i:nth-child(6) { height: 11px; }\n.chat-voice-duration {\n  font-size: 11px;\n  color: #6b7280;\n}\n.chat-card--video-call-notice {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 12px 14px;\n  min-width: 200px;\n  background: #000;\n  color: #fff;\n}\n.call-icon {\n  width: 28px;\n  height: 28px;\n  border-radius: 50%;\n  background: #2a2a2a;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 13px;\n}\n.call-title {\n  font-size: 14px;\n  font-weight: 600;\n}\n.call-sub {\n  font-size: 11px;\n  opacity: 0.7;\n}\n.chat-card--image {\n  min-width: 180px;\n}\n.image-card__image {\n  height: 120px;\n  background: linear-gradient(135deg, #e7e9ee, #d7dae2);\n}\n.chat-card--sticker {\n  background: transparent;\n  box-shadow: none;\n  padding: 4px;\n}\n.sticker-dot {\n  font-size: 34px;\n  line-height: 1;\n}\n.chat-card--location {\n  padding: 10px 12px;\n  min-width: 180px;\n}\n.location-title {\n  font-size: 13px;\n  font-weight: 600;\n}\n.location-map {\n  margin-top: 8px;\n  height: 70px;\n  border-radius: 8px;\n  background: repeating-linear-gradient(45deg, #f1f2f5 0 6px, #e9ebef 6px 12px);\n}\n.chat-card--drip-invite {\n  padding: 12px;\n  min-width: 200px;\n}\n.invite-title {\n  font-size: 13px;\n  font-weight: 600;\n  margin-bottom: 8px;\n}\n.invite-actions {\n  display: flex;\n  gap: 8px;\n}\n.offline-invite__button {\n  flex: 1 1 auto;\n  height: 30px;\n  border-radius: 8px;\n  background: #f4f4f5;\n  color: #4b5563;\n  font-size: 12px;\n}\n.offline-invite__button--accept {\n  background: #000;\n  color: #fff;\n}\n.chat-card--forward-bundle {\n  padding: 12px;\n  min-width: 220px;\n}\n.forward-title {\n  font-size: 12px;\n  font-weight: 600;\n  padding-bottom: 8px;\n  border-bottom: 1px solid #f1f1f1;\n  margin-bottom: 8px;\n}\n.forward-line {\n  font-size: 12px;\n  color: #4b5563;\n  line-height: 1.9;\n}\n.chat-card--payment-notice {\n  padding: 10px 12px;\n  min-width: 180px;\n}\n.notice-kicker {\n  font-size: 9px;\n  letter-spacing: 0.16em;\n  color: #9ca3af;\n}\n.notice-text {\n  margin-top: 4px;\n  font-size: 13px;\n}\n.receipt-shell {\n  padding: 14px;\n  border-radius: 10px;\n  box-shadow: 0 0 0 1px #efefef;\n  min-width: 210px;\n  background: #fff;\n}\n.receipt-kicker {\n  font-size: 9px;\n  letter-spacing: 0.2em;\n  color: #9ca3af;\n}\n.receipt-title {\n  margin-top: 6px;\n  font-size: 15px;\n  font-weight: 600;\n}\n.receipt-dash {\n  margin: 10px 0;\n  border-top: 1px dashed #d9dbe0;\n}\n.receipt-total {\n  display: flex;\n  justify-content: space-between;\n  font-size: 13px;\n}\n.ticket-barcode {\n  margin-top: 12px;\n  height: 22px;\n  background: repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 9px);\n  opacity: 0.75;\n}\n.checkout-card {\n  padding: 12px;\n  border-radius: 10px;\n  box-shadow: 0 0 0 1px #efefef;\n  min-width: 210px;\n}\n.checkout-title {\n  font-size: 13px;\n  font-weight: 600;\n}\n.checkout-money {\n  margin-top: 6px;\n  font-size: 20px;\n  font-weight: 600;\n}\n.checkout-actions {\n  display: flex;\n  gap: 8px;\n  margin-top: 10px;\n}\n.checkout-button {\n  flex: 1 1 0;\n  height: 30px;\n  border-radius: 8px;\n  background: #f4f4f5;\n  color: #4b5563;\n  font-size: 12px;\n}\n.checkout-button--pay {\n  background: #000;\n  color: #fff;\n}\n.peer-pay-notice {\n  margin-top: 8px;\n  padding: 8px 12px;\n  border-radius: 8px;\n  background: #f7f8fa;\n  font-size: 12px;\n  color: #4b5563;\n}\n.translation-panel {\n  padding: 10px 12px;\n  border-radius: 10px;\n  box-shadow: 0 0 0 1px #efefef;\n  min-width: 200px;\n}\n.translation-src {\n  font-size: 12px;\n  color: #9ca3af;\n}\n.translation-dst {\n  margin-top: 4px;\n  font-size: 13px;\n}\n.chat-input-bar {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 8px 12px 10px;\n  border-top: 1px solid #efefef;\n  background: #fff;\n}\n.chat-input-plus,\n.chat-input-heart {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background: #f4f4f5;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 14px;\n  color: #6b7280;\n  flex: 0 0 auto;\n}\n.chat-input-textarea {\n  flex: 1 1 auto;\n  min-height: 34px;\n  border-radius: 17px;\n  background: #f4f4f5;\n  padding: 8px 14px;\n  font-size: 13px;\n  color: #9ca3af;\n}\n.chat-input-send {\n  width: 32px;\n  height: 32px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #111;\n  flex: 0 0 auto;\n}\n\n/* ================= 卡片墙 ================= */\n.cardwall {\n  padding: 14px;\n  display: flex;\n  flex-direction: column;\n  gap: 18px;\n  background: #fff;\n  min-height: 100vh;\n}\n.cardwall__item {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n}\n.cardwall__stage {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  align-items: flex-start;\n}\n.cardwall__stage > .chat-message {\n  align-self: stretch;\n}\n.cardwall__cap {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  cursor: pointer;\n  font-size: 10px;\n  letter-spacing: 0.08em;\n  color: #9ca3af;\n}\n.cardwall__line {\n  flex: 1 1 auto;\n  height: 1px;\n  background: #ecedef;\n}\n.cardwall__cap-text {\n  flex: 0 0 auto;\n  font-family: ui-monospace, Menlo, monospace;\n}\n\n/* ================= 界面档 ================= */\n.iface {\n  background: #fff;\n  min-height: 100vh;\n}\n.iface__page {\n  display: flex;\n  flex-direction: column;\n  min-height: 100vh;\n  border-bottom: 12px solid #f7f8fa;\n}\n.page-header {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 16px 16px 10px;\n}\n.page-header__back {\n  font-size: 20px;\n  color: #111;\n  width: 24px;\n}\n.page-header__title {\n  flex: 1 1 auto;\n  text-align: center;\n  font-size: 15px;\n  letter-spacing: 0.22em;\n  font-weight: 500;\n}\n.page-header__title--serif {\n  font-family: Georgia, "Songti SC", serif;\n  font-size: 20px;\n  letter-spacing: 0.36em;\n}\n.page-header__action {\n  width: 24px;\n  text-align: right;\n  color: #111;\n  font-size: 15px;\n}\n.inbox-search {\n  margin: 6px 16px 4px;\n  height: 38px;\n  border-radius: 19px;\n  background: #f4f4f5;\n  display: flex;\n  align-items: center;\n  padding: 0 16px;\n}\n.inbox-search__text {\n  font-size: 14px;\n  color: #9ca3af;\n}\n.inbox-list {\n  flex: 1 1 auto;\n}\n.conversation-item {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n  padding: 12px 16px;\n}\n.conversation-item--active .conversation-name {\n  font-weight: 600;\n}\n.conversation-avatar {\n  width: 46px;\n  height: 46px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.conversation-info {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.conversation-line {\n  display: flex;\n  align-items: baseline;\n  gap: 6px;\n}\n.conversation-pin {\n  font-size: 9px;\n  color: #9ca3af;\n}\n.conversation-name {\n  flex: 1 1 auto;\n  font-size: 15px;\n  color: #111;\n}\n.conversation-time {\n  font-size: 11px;\n  color: #9ca3af;\n}\n.conversation-snippet {\n  margin-top: 4px;\n  font-size: 13px;\n  color: #6b7280;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.bottom-nav {\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n  padding: 10px 0 16px;\n  border-top: 1px solid #efefef;\n  background: #fff;\n  margin-top: auto;\n}\n.tab-item {\n  font-size: 17px;\n  color: #b6bac1;\n}\n.tab-item--on {\n  color: #111;\n}\n.tab-item--plus {\n  width: 39px;\n  height: 39px;\n  border-radius: 50%;\n  background: #f4f4f5;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #111;\n}\n.feed {\n  flex: 1 1 auto;\n  padding: 4px 0 0;\n}\n.post-item {\n  display: flex;\n  gap: 10px;\n  padding: 14px 16px;\n  border-bottom: 1px solid #f4f4f5;\n}\n.post-avatar-small {\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.post-main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.post-line {\n  display: flex;\n  align-items: baseline;\n  gap: 8px;\n}\n.post-author-name {\n  font-size: 14px;\n  font-weight: 600;\n}\n.post-timestamp {\n  font-size: 11px;\n  color: #9ca3af;\n}\n.post-more {\n  margin-left: auto;\n  color: #b6bac1;\n  font-size: 12px;\n}\n.post-body {\n  margin-top: 6px;\n  font-size: 14px;\n  line-height: 1.8;\n  color: #1b1c1f;\n}\n.post-actions {\n  display: flex;\n  align-items: center;\n  gap: 22px;\n  margin-top: 10px;\n}\n.post-action-unit {\n  font-size: 15px;\n  color: #111;\n  display: inline-flex;\n  align-items: center;\n  gap: 5px;\n}\n.post-action-unit i {\n  font-style: normal;\n  font-size: 12px;\n  color: #6b7280;\n}\n.grid {\n  display: grid;\n  grid-template-columns: repeat(4, 1fr);\n  gap: 14px;\n  padding: 18px 16px;\n}\n.square-app-btn {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 6px;\n}\n.app-icon-bg {\n  width: 52px;\n  height: 52px;\n  border-radius: 14px;\n  background: #eef0f4;\n}\n.app-label {\n  font-size: 10px;\n  color: #888;\n}\n.iface__page--desktop {\n  min-height: 0;\n  border-bottom: 0;\n}\n\n/* ================= 线下档 ================= */\n.offline-mode {\n  display: flex;\n  flex-direction: column;\n  height: 100vh;\n  overflow: hidden;\n  background: #fff;\n}\n.offline-mode__scroll {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow-y: auto;\n  padding: 0 14px 20px;\n}\n.offline-header {\n  display: flex;\n  align-items: center;\n  gap: 8px;\n  padding: 14px 2px 12px;\n}\n.offline-header__back {\n  font-size: 18px;\n  color: #9ca3af;\n  width: 22px;\n}\n.offline-header__main {\n  flex: 1 1 auto;\n  text-align: center;\n}\n.offline-header__title {\n  font-family: Georgia, "Songti SC", serif;\n  font-style: italic;\n  font-size: 17px;\n}\n.offline-header__sub {\n  margin-top: 2px;\n  font-size: 9px;\n  letter-spacing: 0.12em;\n  color: #b6bac1;\n}\n.offline-header__action {\n  width: 22px;\n  text-align: center;\n  color: #6b7280;\n  font-size: 14px;\n}\n.offline-card {\n  border-radius: 24px;\n  box-shadow: 0 0 0 1px #f1f2f4;\n  background: #fff;\n  margin-bottom: 16px;\n  overflow: hidden;\n}\n.offline-card__header {\n  display: flex;\n  gap: 12px;\n  padding: 16px;\n  border-bottom: 1px solid #f4f4f5;\n}\n.offline-card__avatar-shell {\n  width: 46px;\n  height: 46px;\n  border-radius: 50%;\n  overflow: hidden;\n  background: #e4e7ee;\n  flex: 0 0 auto;\n}\n.offline-card__avatar-fallback {\n  width: 100%;\n  height: 100%;\n  background: #e4e7ee;\n}\n.offline-card__header-main {\n  flex: 1 1 auto;\n  min-width: 0;\n}\n.offline-card__title-row {\n  display: flex;\n  align-items: baseline;\n  gap: 8px;\n}\n.offline-card__sender {\n  font-size: 16px;\n  font-weight: 600;\n}\n.offline-card__floor {\n  margin-left: auto;\n  font-size: 9px;\n  letter-spacing: 0.14em;\n  color: #d4d4d8;\n}\n.offline-card__meta-row {\n  margin-top: 4px;\n}\n.offline-card__time {\n  font-size: 11px;\n  letter-spacing: 0.08em;\n  color: #a1a1aa;\n}\n.offline-card__body {\n  padding: 18px 16px;\n}\n.offline-card__content-text {\n  font-size: 15px;\n  line-height: 2;\n  color: #3f3f46;\n}\n.offline-card__inline-quote {\n  border-left: 3px solid #e4e4e7;\n  padding-left: 10px;\n  margin: 10px 0;\n  font-style: italic;\n  color: #71717a;\n  font-size: 14px;\n}\n.offline-card__play {\n  font-size: 10px;\n  color: #6b7280;\n  margin-right: 4px;\n}\n.offline-card__footer {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 12px 16px 14px;\n  border-top: 1px solid #f4f4f5;\n}\n.offline-card__footer-line {\n  flex: 1 1 auto;\n  height: 1px;\n  background: #f1f2f4;\n}\n.offline-card__footer-label {\n  font-size: 9px;\n  letter-spacing: 0.2em;\n  color: #d4d4d8;\n}\n.offline-card__footer-right {\n  display: flex;\n  align-items: center;\n  gap: 6px;\n}\n.offline-card__footer-status {\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background: #a7f3d0;\n}\n.offline-card__footer-metric {\n  font-size: 9px;\n  letter-spacing: 0.1em;\n  color: #d4d4d8;\n}\n.offline-menu {\n  border-top: 1px solid #f4f4f5;\n  padding-top: 6px;\n}\n.offline-menu__row {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding: 13px 2px;\n  border-bottom: 1px solid #f7f8fa;\n  font-size: 14px;\n  color: #3f3f46;\n}\n.offline-menu__chev {\n  color: #d4d4d8;\n}\n.noir-toggle {\n  width: 38px;\n  height: 22px;\n  border-radius: 999px;\n  background: #e4e4e7;\n  display: inline-flex;\n  align-items: center;\n  padding: 2px;\n}\n.noir-toggle-bg {\n  width: 18px;\n  height: 18px;\n  border-radius: 50%;\n  background: #fff;\n}\n.offline-input-bar {\n  flex: 0 0 auto;\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 10px 14px 14px;\n  border-top: 1px solid #f1f2f4;\n  background: #fff;\n}\n.offline-input-sync {\n  width: 34px;\n  height: 34px;\n  border-radius: 50%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #9ca3af;\n  font-size: 16px;\n}\n.offline-input-field {\n  flex: 1 1 auto;\n  height: 38px;\n  border-radius: 19px;\n  border: 1px solid #e4e4e7;\n  display: flex;\n  align-items: center;\n  padding: 0 16px;\n  font-size: 13px;\n  color: #a1a1aa;\n}\n.offline-input-send {\n  width: 38px;\n  height: 38px;\n  border-radius: 50%;\n  background: #111;\n  color: #fff;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-size: 14px;\n}\n';
 
-  // src/ui/preview/scenes.js
-  var ONLINE = `
+  // src/ui/preview/scenes/chat.js
+  var CHAT_HTML = `
 <div class="chat-viewport-root">
   <header class="chat-header">
+    <div class="chat-header-button chat-header-button--back">‹</div>
     <div class="chat-header-avatar"></div>
     <div class="chat-header-meta">
-      <div class="chat-header-title">沈砚</div>
-      <div class="chat-header-online">在线</div>
+      <div class="chat-header-title">美化测试员</div>
+      <div class="chat-header-subtitle">ONLINE</div>
     </div>
-    <div class="chat-header-button"></div>
+    <div class="chat-header-button chat-header-button--search">⌕</div>
+    <div class="chat-header-button chat-header-button--more">···</div>
   </header>
 
   <main class="chat-scroll-area">
-    <div class="chat-message-time">今天 21:04</div>
+    <div class="chat-message-time">16:56</div>
 
     <div class="chat-message chat-message--received">
       <div class="chat-message-avatar"></div>
       <div class="chat-message-body">
-        <div class="chat-message-sender-name">沈砚</div>
-        <div class="bubble-received bubble-tail-ios">今晚的雨停了，窗台上的水还在往下淌。</div>
-      </div>
-    </div>
-
-    <div class="chat-message chat-message--sent">
-      <div class="chat-message-avatar"></div>
-      <div class="chat-message-body">
-        <div class="bubble-sent bubble-tail-ios">那我给你留一盏灯。</div>
+        <div class="bubble-received bubble-tail-ios">今天表现不错吧</div>
       </div>
     </div>
 
     <div class="chat-message chat-message--received">
       <div class="chat-message-avatar"></div>
       <div class="chat-message-body">
-        <div class="quote-line">那我给你留一盏灯。</div>
-        <div class="bubble-received bubble-tail-ios">留着吧，我记得回来看。</div>
+        <div class="chat-card chat-card--voice">
+          <span class="chat-voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="chat-voice-duration">2″</span>
+        </div>
+        <div class="chat-message-time chat-message-time--below">16:56</div>
+      </div>
+    </div>
+
+    <div class="chat-message-time">17:32</div>
+
+    <div class="chat-message chat-message--sent">
+      <div class="chat-message-avatar"></div>
+      <div class="chat-message-body">
+        <div class="chat-card chat-card--video-call-notice">
+          <div class="call-icon">✆</div>
+          <div class="call-text">
+            <div class="call-title">Canceled Call</div>
+            <div class="call-sub">Canceled</div>
+          </div>
+        </div>
+        <div class="chat-message-time chat-message-time--below">17:32</div>
+      </div>
+    </div>
+
+    <div class="chat-message-time">17:43</div>
+
+    <div class="chat-message chat-message--sent">
+      <div class="chat-message-avatar"></div>
+      <div class="chat-message-body">
+        <div class="chat-card chat-card--transfer">
+          <div class="transfer-head">
+            <span class="transfer-icon">¥</span>
+            <span class="transfer-label">转账</span>
+            <span class="transfer-status">待收款</span>
+          </div>
+          <div class="transfer-amount">¥ 1.00</div>
+          <div class="transfer-note">转给 美化测试</div>
+        </div>
+        <div class="chat-message-time chat-message-time--below">17:43</div>
       </div>
     </div>
 
     <div class="chat-message chat-message--sent">
       <div class="chat-message-avatar"></div>
-      <div class="chat-card chat-card--transfer">
-        <div><span class="transfer-amount">66.00</span><span class="transfer-currency">CNY</span></div>
-        <div style="font-size:12px;color:#9ca3af;margin-top:6px">转账 · 买把伞</div>
+      <div class="chat-message-body">
+        <div class="quote-line">美化测试员</div>
+        <div class="bubble-sent bubble-tail-ios">节奏感一下就上来了</div>
+        <div class="chat-message-time chat-message-time--below">17:48</div>
+      </div>
+    </div>
+
+    <div class="chat-message chat-message--received">
+      <div class="chat-message-avatar"></div>
+      <div class="chat-message-body">
+        <div class="chat-card chat-card--image">
+          <div class="image-card__image"></div>
+          <div class="chat-card__caption">图片 · 16:20</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-message chat-message--received">
+      <div class="chat-message-avatar"></div>
+      <div class="chat-message-body">
+        <div class="chat-card chat-card--sticker"><span class="sticker-dot">✳</span></div>
       </div>
     </div>
 
@@ -4703,82 +5881,400 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       </div>
     </div>
 
+    <div class="chat-system-text">对方撤回了一条消息</div>
     <div class="chat-message-time"><span class="typing-dot"></span> 对方正在输入</div>
   </main>
 
-  <div class="chat-plus-panel">
-    <div class="chat-plus-action"><div class="chat-plus-action__icon"></div><span>相册</span></div>
-    <div class="chat-plus-action"><div class="chat-plus-action__icon"></div><span>图片</span></div>
-    <div class="chat-plus-action"><div class="chat-plus-action__icon"></div><span>转账</span></div>
-    <div class="chat-plus-action"><div class="chat-plus-action__icon"></div><span>位置</span></div>
-  </div>
-
   <div class="chat-input-bar">
-    <div class="chat-input-plus"></div>
-    <div class="chat-input-textarea">说点什么…</div>
-    <div class="chat-input-heart"></div>
-    <div class="chat-input-send"></div>
+    <div class="chat-input-plus">+</div>
+    <div class="chat-input-textarea">Message...</div>
+    <div class="chat-input-heart">♡</div>
+    <div class="chat-input-send">➤</div>
   </div>
 </div>`;
-  var GLOBAL = `
-<div class="global-page">
-  <div class="grid">
-    <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">相册</div></div>
-    <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">备忘录</div></div>
-    <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">世界书</div></div>
-    <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">设置</div></div>
-  </div>
 
-  <div class="post-item">
-    <div><span class="post-author-name">沈砚</span><span class="post-timestamp">2 小时前</span></div>
-    <div class="post-body">楼下的梧桐开始落叶了。今年秋天来得比往年早一点。</div>
-    <div class="post-actions">
-      <span class="post-action-btn">喜欢 12</span>
-      <span class="post-action-btn">评论 3</span>
-      <span class="post-action-btn">转发</span>
-    </div>
-  </div>
+  // src/ui/preview/scenes/cards.js
+  function card(nodeId, label, body) {
+    return '<section class="cardwall__item"><div class="cardwall__stage">' + body + '</div><div class="cardwall__cap" data-node="' + nodeId + '"><span class="cardwall__line"></span><span class="cardwall__cap-text">' + nodeId + " · " + label + '</span><span class="cardwall__line"></span></div></section>';
+  }
+  var CARDS_HTML = `
+<div class="cardwall">
+  ${card("online.card-transfer", "转账 / 收款", `
+    <div class="chat-card chat-card--transfer">
+      <div class="transfer-head"><span class="transfer-icon">¥</span><span class="transfer-label">转账</span><span class="transfer-status">待收款</span></div>
+      <div class="transfer-amount">¥ 1.00</div>
+      <div class="transfer-note">转给 美化测试</div>
+    </div>`)}
 
-  <div class="bottom-nav"><span>动态</span><span>消息</span><span>我的</span></div>
-</div>`;
-  var OFFLINE = `
-<div class="offline-mode">
-  <div class="offline-card">
-    <div class="offline-card-top">
-      <div class="offline-card__sender">沈砚</div>
-      <div class="offline-card__time">21:04 · 雨</div>
+  ${card("online.card-media", "图片 / 位置", `
+    <div class="chat-card chat-card--image">
+      <div class="image-card__image"></div>
+      <div class="chat-card__caption">图片 · 16:20</div>
     </div>
-    <div class="offline-card__body">
-      <div class="offline-card__content-text">
-        今晚的雨停了，窗台上的水还在往下淌。我把窗开了一条缝，风带着一点凉。
-        <div class="offline-card__inline-quote">「留着吧，我记得回来看。」</div>
-        你要是还没睡，就坐一会儿。
+    <div class="chat-card chat-card--location">
+      <div class="location-title">江边 · 旧书店</div>
+      <div class="location-map"></div>
+    </div>`)}
+
+  ${card("online.card-voice", "语音", `
+    <div class="chat-card chat-card--voice">
+      <span class="chat-voice-wave"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      <span class="chat-voice-duration">2″</span>
+    </div>`)}
+
+  ${card("online.card-sticker", "表情包 / 贴纸", `
+    <div class="chat-card chat-card--sticker"><span class="sticker-dot">✳</span></div>`)}
+
+  ${card("online.card-forward", "聊天记录", `
+    <div class="chat-card chat-card--forward-bundle">
+      <div class="forward-title">聊天记录 · 共 3 条</div>
+      <div class="forward-line">01 今晚的雨停了</div>
+      <div class="forward-line">02 我给你留一盏灯</div>
+      <div class="forward-line">03 留着吧，我记得回来</div>
+    </div>`)}
+
+  ${card("online.card-invite", "邀请", `
+    <div class="chat-card chat-card--drip-invite">
+      <div class="invite-title">一起听 · 邀请</div>
+      <div class="invite-actions">
+        <button class="offline-invite__button offline-invite__button--accept">接受</button>
+        <button class="offline-invite__button">拒绝</button>
+      </div>
+    </div>`)}
+
+  ${card("online.card-notice", "通知", `
+    <div class="chat-card chat-card--video-call-notice">
+      <div class="call-icon">✆</div>
+      <div class="call-text"><div class="call-title">Canceled Call</div><div class="call-sub">Canceled</div></div>
+    </div>
+    <div class="chat-card chat-card--payment-notice">
+      <div class="notice-kicker">NOTICE</div>
+      <div class="notice-text">对方已确认收款</div>
+    </div>`)}
+
+  ${card("online.receipt", "小票 / 票券", `
+    <div class="receipt-shell">
+      <div class="receipt-kicker">RECEIPT</div>
+      <div class="receipt-title">转账凭证</div>
+      <div class="receipt-dash"></div>
+      <div class="receipt-total"><span>合计</span><span>¥ 1.00</span></div>
+      <div class="ticket-barcode"></div>
+    </div>`)}
+
+  ${card("online.card-money", "赠送 / 代付 / 亲属卡", `
+    <div class="checkout-card">
+      <div class="checkout-title">赠送一杯咖啡</div>
+      <div class="checkout-money">¥ 28.00</div>
+      <div class="checkout-actions">
+        <button class="checkout-button checkout-button--pay">送出</button>
+        <button class="checkout-button">取消</button>
       </div>
     </div>
-    <div class="offline-card__footer">
-      <span class="offline-card__floor">PAGE 02</span>
-      <span>1,204 字</span>
+    <div class="peer-pay-notice">对方已代付 ¥ 20.00</div>`)}
+
+  ${card("online.msgrow", "消息行 / 头像（只读）", `
+    <div class="chat-message chat-message--received">
+      <div class="chat-message-avatar"></div>
+      <div class="chat-message-body">
+        <div class="chat-message-sender-name">美化测试员</div>
+        <div class="bubble-received bubble-tail-ios">这一条用来检查头像与消息行的间距</div>
+      </div>
+    </div>`)}
+
+  ${card("online.translation", "翻译", `
+    <div class="translation-panel">
+      <div class="translation-block">
+        <div class="translation-src">今晚的雨停了。</div>
+        <div class="translation-dst">The rain stopped tonight.</div>
+      </div>
+    </div>`)}
+
+  ${card("online.quote", "引用 / 回复", `
+    <div class="chat-message chat-message--sent">
+      <div class="chat-message-body">
+        <div class="quote-line">那我给你留一盏灯。</div>
+        <div class="bubble-sent bubble-tail-ios">留着吧</div>
+      </div>
+    </div>`)}
+
+  ${card("online.time", "时间 / 发送者 / 灰字", `
+    <div class="chat-message-time">17:43</div>
+    <div class="chat-message-sender-name">美化测试员</div>
+    <div class="chat-system-text">对方撤回了一条消息</div>`)}
+</div>`;
+
+  // src/ui/preview/scenes/interface.js
+  var INTERFACE_HTML = `
+<div class="iface">
+
+  <section class="iface__page">
+    <header class="page-header">
+      <div class="page-header__back">‹</div>
+      <div class="page-header__title">MESSAGES</div>
+      <div class="page-header__action">✎</div>
+    </header>
+
+    <div class="inbox-search">
+      <span class="inbox-search__text">Search</span>
     </div>
+
+    <div class="inbox-list">
+      <div class="conversation-item conversation-item--pinned">
+        <div class="conversation-avatar"></div>
+        <div class="conversation-info">
+          <div class="conversation-line">
+            <span class="conversation-pin">置顶</span>
+            <span class="conversation-name">温砚雪</span>
+            <span class="conversation-time">周五</span>
+          </div>
+          <div class="conversation-snippet">嘴倒是硬得很。</div>
+        </div>
+      </div>
+
+      <div class="conversation-item conversation-item--active">
+        <div class="conversation-avatar"></div>
+        <div class="conversation-info">
+          <div class="conversation-line">
+            <span class="conversation-name">美化测试员</span>
+            <span class="conversation-time">17:48</span>
+          </div>
+          <div class="conversation-snippet">1</div>
+        </div>
+      </div>
+
+      <div class="conversation-item">
+        <div class="conversation-avatar"></div>
+        <div class="conversation-info">
+          <div class="conversation-line">
+            <span class="conversation-name">叶瑄</span>
+            <span class="conversation-time">周三</span>
+          </div>
+          <div class="conversation-snippet">…听着这个，腰还难受么？</div>
+        </div>
+      </div>
+
+      <div class="conversation-item">
+        <div class="conversation-avatar"></div>
+        <div class="conversation-info">
+          <div class="conversation-line">
+            <span class="conversation-name">砚雪</span>
+            <span class="conversation-time">周二</span>
+          </div>
+          <div class="conversation-snippet">再传讯同我说。</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <span class="tab-item">⌂</span>
+      <span class="tab-item tab-item--on">✉</span>
+      <span class="tab-item tab-item--plus">+</span>
+      <span class="tab-item">♡</span>
+      <span class="tab-item">☺</span>
+    </nav>
+  </section>
+
+  <section class="iface__page">
+    <header class="page-header">
+      <div class="page-header__back">‹</div>
+      <div class="page-header__title page-header__title--serif">NOIR</div>
+      <div class="page-header__action">···</div>
+    </header>
+
+    <div class="feed">
+      <article class="post-item">
+        <div class="post-avatar-small"></div>
+        <div class="post-main">
+          <div class="post-line">
+            <span class="post-author-name">温砚雪</span>
+            <span class="post-timestamp">10-11 23:56</span>
+            <span class="post-more">···</span>
+          </div>
+          <div class="post-body">子夜风露重，某人白日里睡足了，这会儿倒精神得很。</div>
+          <div class="post-actions">
+            <span class="post-action-unit">♡ <i>48</i></span>
+            <span class="post-action-unit">◌ <i>15</i></span>
+            <span class="post-action-unit">⇄ <i>3</i></span>
+            <span class="post-action-unit">➤</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-item">
+        <div class="post-avatar-small"></div>
+        <div class="post-main">
+          <div class="post-line">
+            <span class="post-author-name">温砚雪</span>
+            <span class="post-timestamp">10-06 13:46</span>
+          </div>
+          <div class="post-body">炉火未熄，阶前晴雪初融。有人午正方醒，今日的课业便纵你躲过半日。</div>
+          <div class="post-actions">
+            <span class="post-action-unit">♡ <i>17</i></span>
+            <span class="post-action-unit">◌ <i>13</i></span>
+            <span class="post-action-unit">⇄ <i>3</i></span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-item">
+        <div class="post-avatar-small"></div>
+        <div class="post-main">
+          <div class="post-line">
+            <span class="post-author-name">叶瑄</span>
+            <span class="post-timestamp">10-03 22:04</span>
+          </div>
+          <div class="post-body">露台的灯熄了，窗外的潮声很平缓。……晚安。</div>
+          <div class="post-actions">
+            <span class="post-action-unit">♡ <i>9</i></span>
+            <span class="post-action-unit">◌ <i>2</i></span>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <nav class="bottom-nav">
+      <span class="tab-item tab-item--on">⌂</span>
+      <span class="tab-item">✉</span>
+      <span class="tab-item tab-item--plus">+</span>
+      <span class="tab-item">♡</span>
+      <span class="tab-item">☺</span>
+    </nav>
+  </section>
+
+  <section class="iface__page iface__page--desktop">
+    <div class="grid">
+      <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">相册</div></div>
+      <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">备忘录</div></div>
+      <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">世界书</div></div>
+      <div class="square-app-btn"><div class="app-icon-bg"></div><div class="app-label">设置</div></div>
+    </div>
+  </section>
+
+</div>`;
+
+  // src/ui/preview/scenes/offline.js
+  var OFFLINE_HTML = `
+<div class="offline-mode">
+  <div class="offline-mode__scroll">
+
+    <header class="offline-header">
+      <div class="offline-header__back">‹</div>
+      <div class="offline-header__main">
+        <div class="offline-header__title">Offline Mode</div>
+        <div class="offline-header__sub">LAST ONLINE: 3H 51M AGO</div>
+      </div>
+      <div class="offline-header__action">⤓</div>
+      <div class="offline-header__action">···</div>
+    </header>
+
+    <article class="offline-card">
+      <div class="offline-card__header">
+        <div class="offline-card__avatar-shell"><div class="offline-card__avatar-fallback"></div></div>
+        <div class="offline-card__header-main">
+          <div class="offline-card__title-row">
+            <span class="offline-card__sender">云枝</span>
+            <span class="offline-card__floor">NO.001</span>
+          </div>
+          <div class="offline-card__meta-row">
+            <span class="offline-card__time">OCT 5 · 20:15</span>
+          </div>
+        </div>
+      </div>
+      <div class="offline-card__body">
+        <div class="offline-card__content">
+          <div class="offline-card__content-text">随机生成一段校园剧情（男女主初遇），不少于 4000 字</div>
+        </div>
+      </div>
+      <div class="offline-card__footer">
+        <div class="offline-card__footer-line"></div>
+        <div class="offline-card__footer-label">ARCHIVE</div>
+        <div class="offline-card__footer-right">
+          <span class="offline-card__footer-metric">87T / 2.32S</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="offline-card">
+      <div class="offline-card__header">
+        <div class="offline-card__avatar-shell"><div class="offline-card__avatar-fallback"></div></div>
+        <div class="offline-card__header-main">
+          <div class="offline-card__title-row">
+            <span class="offline-card__sender">美化测试员</span>
+            <span class="offline-card__floor">NO.002</span>
+          </div>
+          <div class="offline-card__meta-row">
+            <span class="offline-card__time">OCT 26 · 19:42</span>
+          </div>
+        </div>
+      </div>
+      <div class="offline-card__body">
+        <div class="offline-card__content">
+          <div class="offline-card__content-text">
+            <span class="offline-card__play">▶</span> ako
+          </div>
+          <div class="offline-card__inline-quote">「留着吧，我记得回来看。」</div>
+          <div class="offline-card__content-text">
+            深秋的午后，图书馆最深处的那张长桌被斜射的阳光切成两半，明亮的一侧积满了浮尘，
+            暗处则静得只能听见书页翻动的轻响。
+          </div>
+        </div>
+      </div>
+      <div class="offline-card__footer">
+        <div class="offline-card__footer-line"></div>
+        <div class="offline-card__footer-label">ARCHIVE</div>
+        <div class="offline-card__footer-right">
+          <span class="offline-card__footer-status"></span>
+          <span class="offline-card__footer-metric">112T / 3.08S</span>
+        </div>
+      </div>
+    </article>
+
+    <div class="offline-menu">
+      <div class="offline-menu__row"><span>历史记录</span><span class="offline-menu__chev">›</span></div>
+      <div class="offline-menu__row"><span>画廊</span><span class="offline-menu__chev">›</span></div>
+      <div class="offline-menu__row">
+        <span>夜间模式</span>
+        <span class="noir-toggle"><span class="noir-toggle-bg"></span></span>
+      </div>
+    </div>
+
   </div>
 
-  <div style="margin-top:18px">
-    <div class="offline-menu-row"><span>历史记录</span><span>›</span></div>
-    <div class="offline-menu-row"><span>画廊</span><span>›</span></div>
-    <div class="offline-menu-row"><span>夜间模式</span><span class="noir-toggle-bg"></span></div>
+  <div class="offline-input-bar">
+    <div class="offline-input-sync">⟳</div>
+    <div class="offline-input-field">Type your thought...</div>
+    <div class="offline-input-send">➜</div>
   </div>
 </div>`;
-  function sceneFor(scope) {
-    if (scope === "global") return GLOBAL;
-    if (scope === "offline") return OFFLINE;
-    return ONLINE;
+
+  // src/ui/preview/scenes/index.js
+  var TABS = [
+    { id: "chat", label: "聊天", scope: "online" },
+    { id: "cards", label: "卡片墙", scope: "online" },
+    { id: "interface", label: "界面", scope: "global" },
+    { id: "offline", label: "线下", scope: "offline" }
+  ];
+  function tabOf(id) {
+    return TABS.find(function(t) {
+      return t.id === id;
+    }) || TABS[0];
   }
+  function htmlFor(tabId) {
+    if (tabId === "cards") return CARDS_HTML;
+    if (tabId === "interface") return INTERFACE_HTML;
+    if (tabId === "offline") return OFFLINE_HTML;
+    return CHAT_HTML;
+  }
+  var TAB_IDS = TABS.map(function(t) {
+    return t.id;
+  });
 
   // src/ui/preview/index.js
-  function buildHtml(scope, css) {
-    return '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + baseline_default + '</style><style id="skin-studio-preview">' + (css || "") + "</style></head><body>" + sceneFor(scope) + "</body></html>";
+  function buildHtml(html, css) {
+    return '<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>' + baseline_default + '</style><style id="skin-studio-preview">' + (css || "") + "</style></head><body>" + html + "</body></html>";
   }
-  function renderPreview(ctx, actions, initialScope, extraCss, extraLabel) {
-    let scope = initialScope || "online";
+  function renderPreview(ctx, actions, initialScope, initialTab, extraCss, extraLabel) {
+    let tabId = initialTab || "chat";
     const tabs = el("div", { class: "ss-pv__tabs" });
     const stage = el("div", { class: "ss-pv__stage" });
     const note = el("div", {
@@ -4787,40 +6283,64 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       text: extraCss ? "正在预览：" + (extraLabel || "单条回复") + "（未写入分支）" : ""
     });
     const foot = el("div", { class: "ss-pv__foot" });
+    function scopeNow() {
+      return tabOf(tabId).scope;
+    }
     function renderTabs() {
       tabs.replaceChildren();
-      ["online", "offline", "global"].forEach(function(id) {
-        const tab = el("button", {
-          class: "ss-tab" + (scope === id ? " ss-tab--on" : ""),
-          text: SCOPE_LABEL[id]
+      TABS.forEach(function(tab) {
+        const btn = el("button", {
+          class: "ss-tab" + (tabId === tab.id ? " ss-tab--on" : ""),
+          text: tab.label
         });
-        tab.addEventListener("click", function() {
-          scope = id;
+        btn.addEventListener("click", function() {
+          if (tabId === tab.id) return;
+          tabId = tab.id;
           renderTabs();
           renderFrame();
           renderFoot();
         });
-        tabs.appendChild(tab);
+        tabs.appendChild(btn);
       });
     }
     function renderFrame() {
-      const css = ctx.preview(scope, scope === (initialScope || "online") ? extraCss : "");
+      const scope = scopeNow();
+      const injectExtra = extraCss && scope === (initialScope || "online");
+      const css = ctx.preview(scope, injectExtra ? extraCss : "");
       const frame = el("iframe", {
         class: "ss-pv__frame",
-        srcdoc: buildHtml(scope, css),
+        srcdoc: buildHtml(htmlFor(tabId), css),
         sandbox: "allow-same-origin"
+      });
+      frame.addEventListener("load", function() {
+        try {
+          const doc = frame.contentDocument;
+          if (!doc) return;
+          doc.addEventListener("click", function(ev) {
+            const target = ev.target && ev.target.closest ? ev.target.closest("[data-node]") : null;
+            if (target && target.getAttribute("data-node")) {
+              actions.openNode(target.getAttribute("data-node"));
+            }
+          });
+        } catch (err) {
+          console.warn("[skin-studio] 预览代理失败", err);
+        }
       });
       stage.replaceChildren(el("div", { class: "ss-device" }, [frame]));
     }
     function renderFoot() {
+      const scope = scopeNow();
+      const count = collectScope(scope, ctx.state.branches).length;
       foot.replaceChildren(
-        el("button", {
-          class: "ss-btn ss-btn--primary",
-          style: { flex: "1 1 0" },
-          text: "导出这份（" + SCOPE_LABEL[scope] + "）",
-          onclick: function() {
-            ctx.exportScope(scope);
-          }
+        el("div", {
+          style: {
+            flex: "1 1 auto",
+            fontSize: "11px",
+            color: "var(--ss-muted)",
+            display: "flex",
+            alignItems: "center"
+          },
+          text: SCOPE_LABEL[scope] + " · " + count + " 个分支已注入"
         }),
         el("button", {
           class: "ss-btn ss-btn--ghost",
@@ -4834,7 +6354,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
             }
             ctx.confirm({
               title: "临时应用到宿主？",
-              message: "会改动 Roche 真实页面外观（仅 " + SCOPE_LABEL[scope] + "），本机本次运行有效，重启失效。"
+              message: "会改动 Roche 真实页面外观（仅 " + SCOPE_LABEL[scope] + "），本机本次运行有效。"
             }).then(function(ok) {
               if (!ok) return;
               ctx.applyLive(scope);
@@ -4842,19 +6362,17 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
               renderFoot();
             });
           }
+        }),
+        el("button", {
+          class: "ss-btn ss-btn--primary",
+          text: "导出这份",
+          onclick: function() {
+            actions.openExportResult(scope);
+          }
         })
       );
     }
-    const bar = el("div", {
-      style: {
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        height: "48px",
-        padding: "0 10px",
-        borderBottom: "1px solid var(--ss-line)"
-      }
-    }, [
+    const bar = el("div", { class: "ss-screen__bar" }, [
       el("button", { class: "ss-icon-btn", onclick: actions.closePreview }, [svgIcon("back", 18)]),
       el("div", { class: "ss-crumb__main", style: { flex: "1 1 auto", textAlign: "center" }, text: "预览" }),
       el("button", { class: "ss-icon-btn", onclick: actions.closePreview }, [svgIcon("close", 18)])
@@ -4945,6 +6463,58 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       });
       root.appendChild(layer);
     }
+    function askText(title, value) {
+      return new Promise(function(resolve) {
+        const input = el("input", {
+          class: "ss-field__input",
+          style: { marginTop: "10px" },
+          value: value || ""
+        });
+        const layer = el("div", { class: "ss-dialog" }, [
+          el("div", { class: "ss-dialog__box" }, [
+            el("div", { class: "ss-dialog__title", text: title }),
+            input,
+            el("div", { class: "ss-dialog__foot" }, [
+              el("button", {
+                class: "ss-btn ss-btn--ghost",
+                text: "取消",
+                onclick: function() {
+                  close();
+                  resolve(null);
+                }
+              }),
+              el("button", {
+                class: "ss-btn ss-btn--primary",
+                text: "确定",
+                onclick: function() {
+                  close();
+                  resolve(input.value.trim());
+                }
+              })
+            ])
+          ])
+        ]);
+        layer.addEventListener("click", function(ev) {
+          if (ev.target === layer) {
+            close();
+            resolve(null);
+          }
+        });
+        function close() {
+          layer.classList.remove("ss-dialog--in");
+          setTimeout(function() {
+            if (layer.parentNode) layer.parentNode.removeChild(layer);
+          }, 180);
+        }
+        root.appendChild(layer);
+        requestAnimationFrame(function() {
+          layer.classList.add("ss-dialog--in");
+        });
+        setTimeout(function() {
+          input.focus();
+        }, 60);
+      });
+    }
     function openSide() {
       sideOpen = true;
       if (sidebar) sidebar.classList.add("ss-side--in");
@@ -4978,6 +6548,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       sheetOpen = kind;
       clear(sheet);
       if (kind === "export") sheet.appendChild(renderExportSheet(ctx, actions));
+      else if (kind === "projects") sheet.appendChild(renderProjectsSheet());
       else sheet.appendChild(renderMenu());
       sheet.classList.add("ss-sheet--in");
       updateMask();
@@ -4990,12 +6561,114 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
     function openExport() {
       openSheet("export");
     }
+    function openProjects() {
+      openSheet("projects");
+    }
+    function renderProjectsSheet() {
+      const box = el("div", { class: "ss-sheet__body" });
+      box.appendChild(el("div", {
+        class: "ss-panel-note",
+        text: "每个方案是一套独立的美化：分支代码、对话、导出互不影响。"
+      }));
+      ctx.state.projects.forEach(function(p) {
+        const active = p.id === ctx.state.activeProjectId;
+        const row2 = el("div", { class: "ss-proj-item" + (active ? " ss-proj-item--on" : "") }, [
+          el("button", { class: "ss-proj-item__main" }, [
+            el("div", { class: "ss-proj-item__name", text: p.name }),
+            el("div", {
+              class: "ss-proj-item__meta",
+              text: (p.written || 0) + " 个分支有内容 · " + new Date(p.updatedAt || Date.now()).toLocaleDateString("zh-CN")
+            })
+          ]),
+          active ? el("span", { class: "ss-proj-item__tick", text: "✓" }) : null,
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              askText("重命名方案", p.name).then(function(name) {
+                if (name === null) return;
+                ctx.renameProject(name, p.id);
+                openProjects();
+              });
+            }
+          }, [svgIcon("edit", 14)]),
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              ctx.duplicateProject(p.id).then(function() {
+                openProjects();
+              });
+            }
+          }, [svgIcon("copy", 14)]),
+          el("button", {
+            class: "ss-mini-btn",
+            onclick: function() {
+              ctx.confirm({
+                title: "删除「" + p.name + "」？",
+                message: "该方案的所有分支代码与对话都会被删除，无法恢复。"
+              }).then(function(ok) {
+                if (!ok) return;
+                ctx.deleteProject(p.id).then(function() {
+                  openProjects();
+                });
+              });
+            }
+          }, [svgIcon("trash", 14)])
+        ]);
+        row2.querySelector(".ss-proj-item__main").addEventListener("click", function() {
+          ctx.switchProject(p.id).then(function() {
+            closeSheet();
+            closeSide();
+          });
+        });
+        box.appendChild(row2);
+      });
+      const foot = el("div", { class: "ss-sheet__foot" }, [
+        el("button", {
+          class: "ss-btn ss-btn--primary",
+          style: { flex: "1 1 0" },
+          text: "新建方案",
+          onclick: function() {
+            askText("新方案的名字", "美化 " + (ctx.state.projects.length + 1)).then(function(name) {
+              if (name === null) return;
+              ctx.createProject(name).then(function() {
+                closeSheet();
+                closeSide();
+              });
+            });
+          }
+        }),
+        el("button", {
+          class: "ss-btn ss-btn--ghost",
+          text: "复制当前",
+          onclick: function() {
+            ctx.duplicateProject(ctx.state.activeProjectId).then(function() {
+              openProjects();
+            });
+          }
+        })
+      ]);
+      return el("div", { class: "ss-sheet-inner" }, [
+        el("div", { class: "ss-sheet__head" }, [
+          el("div", { class: "ss-sheet__title", text: "美化方案" }),
+          el("button", { class: "ss-icon-btn", onclick: closeSheet }, [svgIcon("close", 18)])
+        ]),
+        box,
+        foot
+      ]);
+    }
     function renderMenu() {
       const box = el("div", { class: "ss-sheet__body" });
       const items = [
+        { label: "切换 / 新建美化方案", onClick: function() {
+          openProjects();
+        } },
         { label: "导出 CSS（线上 / 线下 / 全局）", onClick: function() {
           closeSheet();
           openExport();
+        } },
+        { label: "提示词预设", onClick: function() {
+          closeSheet();
+          openScreen("presets");
         } },
         { label: "素材库", onClick: function() {
           closeSheet();
@@ -5025,14 +6698,11 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         }
       ];
       items.forEach(function(item) {
-        const row2 = el("button", {
-          style: { display: "block", width: "100%", padding: "14px 16px", borderBottom: "1px solid var(--ss-line)" },
-          text: item.label
-        });
+        const row2 = el("button", { class: "ss-menu-row", text: item.label });
         row2.addEventListener("click", item.onClick);
         box.appendChild(row2);
       });
-      return el("div", { style: { display: "flex", flexDirection: "column", flex: "1 1 auto", minHeight: "0" } }, [
+      return el("div", { class: "ss-sheet-inner" }, [
         el("div", { class: "ss-sheet__head" }, [
           el("div", { class: "ss-sheet__title", text: "操作" }),
           el("button", { class: "ss-icon-btn", onclick: closeSheet }, [svgIcon("close", 18)])
@@ -5045,21 +6715,19 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       screenData = data || {};
       clear(screen);
       if (name === "preview") {
-        screen.appendChild(renderPreview(ctx, actions, screenData.scope || "online", screenData.extraCss || "", screenData.label || ""));
+        screen.appendChild(renderPreview(ctx, actions, screenData.scope || "online", screenData.tab || "", screenData.extraCss || "", screenData.label || ""));
+      } else if (name === "exportResult") {
+        screen.appendChild(renderExportResult(ctx, actions, screenData.scope || "online"));
+      } else if (name === "presets") {
+        screen.appendChild(renderPresetEditor(ctx, actions));
       } else {
-        screen.appendChild(el("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            height: "48px",
-            padding: "0 10px",
-            borderBottom: "1px solid var(--ss-line)",
-            flex: "0 0 auto"
-          }
-        }, [
+        screen.appendChild(el("div", { class: "ss-screen__bar" }, [
           el("button", { class: "ss-icon-btn", onclick: closeScreen }, [svgIcon("back", 18)]),
-          el("div", { class: "ss-crumb__main", style: { flex: "1 1 auto", textAlign: "center" }, text: name === "assets" ? "素材库" : "设置" }),
+          el("div", {
+            class: "ss-crumb__main",
+            style: { flex: "1 1 auto", textAlign: "center" },
+            text: name === "assets" ? "素材库" : "设置"
+          }),
           el("span", { style: { width: "36px" } })
         ]));
         screen.appendChild(name === "assets" ? renderAssets(ctx, actions) : renderSettings(ctx, actions));
@@ -5075,23 +6743,31 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
         if (!screenName) clear(screen);
       }, 220);
     }
-    function openPreview(extraCss, label, scope) {
+    function openPreview(extraCss, label, scope, tab) {
       openScreen("preview", {
         scope: scope || scopeOf(ctx.state.activeNodeId) || "online",
+        tab: tab || "",
         extraCss: extraCss || "",
         label: label || ""
       });
     }
+    function openExportResult(scope) {
+      if (sheetOpen) closeSheet();
+      openScreen("exportResult", { scope: scope || "online" });
+    }
     function refreshScreen() {
-      if (screenName && screenName !== "preview") openScreen(screenName);
+      if (screenName && screenName !== "preview") openScreen(screenName, screenData);
     }
     function renderTop() {
       const nodeId = ctx.state.activeNodeId;
       const node = getNode(nodeId);
       crumbMain.textContent = node ? node.label : "";
-      const path = breadcrumb(nodeId).split(" · ");
+      const path = breadcrumb(nodeId).split(" · ").filter(function(s, i, arr) {
+        return arr.indexOf(s) === i;
+      });
       path.pop();
-      crumbSub.textContent = path.join(" / ");
+      const projectName = ctx.state.project ? ctx.state.project.name : "";
+      crumbSub.textContent = [projectName].concat(path).filter(Boolean).join(" / ");
     }
     function renderBody() {
       const atBottom = body.scrollHeight - body.scrollTop - body.clientHeight < 60;
@@ -5135,6 +6811,11 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       closePrompt,
       openExport,
       closeExport: closeSheet,
+      openProjects,
+      openExportResult,
+      openPresets: function() {
+        openScreen("presets");
+      },
       openPreview,
       closePreview: closeScreen,
       openAssets: function() {
@@ -5152,7 +6833,11 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
       fillInput: function(text) {
         composer.setText(text);
       },
-      lightbox
+      lightbox,
+      openNode: function(nodeId) {
+        closeScreen();
+        ctx.switchNode(nodeId);
+      }
     });
     const off = ctx.onChange(function(scope) {
       if (scope && typeof scope === "object" && scope.toast) {
@@ -5201,7 +6886,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   async function mount(container, roche) {
     ensureStyle();
     container.classList.add("ss-host");
-    app = await createApp({ container, roche, version: "0.2.0" });
+    app = await createApp({ container, roche, version: "0.3.0" });
     shell = mountShell(container, app);
     await app.boot();
   }
@@ -5223,7 +6908,7 @@ div[id^="msg-"] .mb-2.w-full.transition-all {
   window.RochePlugin.register({
     id: "skin-studio",
     name: "美化工作室",
-    version: "0.2.0",
+    version: "0.3.0",
     description: "白色全屏 AI 对话式美化工作台：35 个部位分支、预览、一键合并导出。",
     apps: [
       {
